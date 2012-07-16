@@ -15,6 +15,8 @@
               :year (year)}]
     (->files data
              ["project.clj" (render "project.clj" data)]
+
+             ["resources/local.properties" (render "local.properties" data)]
              
              ["src/{{sanitized}}/setup.clj" (render "setup.clj" data)]
              ["src/{{sanitized}}/persistence.clj" (render "persistence.clj" data)]
