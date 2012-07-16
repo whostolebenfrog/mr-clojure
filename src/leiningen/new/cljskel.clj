@@ -20,7 +20,7 @@
              ["src/{{sanitized}}/web.clj" (render "web.clj" data)]
 
              ["test/{{sanitized}}/unit.clj" (render "unit.clj" data)]
-             ["test/{{sanitized}}/acceptance.clj" (render "acceptance" data)]
+             ["test/{{sanitized}}/acceptance.clj" (render "acceptance.clj" data)]
 
              ["configuration/ComponentManifest.xml" (render "ComponentManifest.xml" data)]
              ["configuration/configuration.xml" (render "configuration.xml" data)]
