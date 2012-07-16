@@ -3,7 +3,7 @@
 
 (def render (renderer "cljskel"))
 
-(def cap [s]
+(defn cap [s]
   (str (.toUpperCase (subs s 0 1)) (subs s 1)))
 
 (defn cljskel
