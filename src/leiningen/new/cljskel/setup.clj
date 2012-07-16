@@ -54,7 +54,7 @@
        (map #(cs/split % #":") (cs/split comma-sep-hosts #","))))
 
 (defn configure-logging []
-  (-> (LogManager/getLogManager) .reset)
+  (.reset (LogManager/getLogManager))
   ;Route all java.util.logging log statements to slf4j, ie mongo client logs
   (SLF4JBridgeHandler/install))
 

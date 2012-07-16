@@ -29,7 +29,7 @@
   [^Exception e]
   (let [sw (new StringWriter)]
     (.printStackTrace e (new PrintWriter sw))
-    (error-response (.toString sw) 500)))
+    (error-response (str sw) 500)))
 
 (def default-paging-params {:start-index "0"
                             :items-per-page "10"})
