@@ -1,0 +1,79 @@
+#!/bin/sh
+#
+# Jetty Control Script
+#
+# To use this script run it as root - it will switch to the specified user
+#
+# Here is a little (and extremely primitive) startup/shutdown script
+# for RedHat systems. It assumes that Jetty lives in /usr/local/jetty,
+# it's run by user 'jetty' and JDK binaries are in /usr/java/default/bin.
+# All this can be changed in the script itself. 
+#
+# Either modify this script for your requirements or just ensure that
+# the following variables are set correctly before calling the script.
+# chkconfig: 345 90 05 
+# description: Runs the Jetty Server 
+# processname: jetty 
+
+#define where jetty is
+GIVEN_HOME="/usr/local/jetty"
+
+JETTY_HOME=${JETTY_HOME:-"$GIVEN_HOME"}
+
+#define the user under which jetty will run, or use 'RUNASIS' to run as the current user
+JETTY_USER=${JETTY_USER:-"jetty"}
+
+#make sure java is in your path
+JAVAPTH=${JAVAPTH:-"/usr/java/default/bin"}
+
+#define property file location
+export SERVICE_JVMARGS="-Dconfig=/usr/local/deployment/{{upper-name}}1/config/post_install.properties"
+
+#define the script to use to start jetty
+JETTYSH=${JETTYSH:-"$JETTY_HOME/bin/start.sh"}
+
+if [ "$JETTY_USER" = "RUNASIS" ]; then
+  SUBIT=""
+else
+  SUBIT="su - $JETTY_USER -s /bin/sh -c "
+fi
+
+JETTY_CONSOLE="/dev/null"
+
+JETTY_CMD_START="cd $JETTY_HOME; $JETTYSH"
+JETTY_CMD_STOP=${JETTY_CMD_STOP:-"$JETTY_HOME/bin/stop.sh"}
+
+if [ -z "`echo $PATH | grep $JAVAPTH`" ]; then
+  export PATH=$PATH:$JAVAPTH
+fi
+
+if [ ! -d "$JETTY_HOME" ]; then
+  echo JETTY_HOME does not exist as a valid directory : $JETTY_HOME
+  exit 1
+fi
+
+case "$1" in
+start)
+    echo Starting Jetty with JETTY_CMD_START=$JETTY_CMD_START
+    cd $JETTY_HOME
+    if [ -z "$SUBIT" ]; then
+        eval $JETTY_CMD_START
+    else
+        $SUBIT "$JETTY_CMD_START"
+    fi
+    ;;
+stop)
+    echo Stopping Jetty
+    if [ -z "$SUBIT" ]; then
+        $JETTY_CMD_STOP
+    else
+        $SUBIT "$JETTY_CMD_STOP"
+    fi 
+    ;;
+restart)
+    $0 stop
+    $0 start
+    ;;
+*)
+    echo "usage: $0 (start|stop|restart)"
+esac

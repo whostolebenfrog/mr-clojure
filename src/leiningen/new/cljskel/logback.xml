@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Properties should be provided as environ variables or the defaults will be used -->
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${service.logging.filethreshold:-info}</level>
+        </filter>
+        <file>${service.logging.path:-/tmp}/taste.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${service.logging.path:-/tmp}/taste.%d{yyyy-MM-dd-HH}.log.zip</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{dd/MM/yyyy HH:mm:ss.SSS} [%thread] %-5level %X{logItemId} %logger{36} - %msg%n %X{stack}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${service.logging.consolethreshold:-info}</level>
+        </filter>
+        <encoder>
+            <pattern>%d{dd/MM/yyyy HH:mm:ss.SSS} [%thread] %-5level %X{logItemId} %logger{36} - %msg%n %X{stack}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="service" class="com.ovi.common.logging.LoggingServiceAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${service.logging.servicethreshold:-warn}</level>
+        </filter>
+        <filter class="com.ovi.common.logging.GraphiteReporterFilter" />
+        <LoggingServiceUrl>${environment.music.errorLogging1Java.baseUrl:-http://errorlogging.music.cq1.brislabs.com:8080/ErrorLogging/1.x}/logitems</LoggingServiceUrl>
+        <ServiceName>Taste</ServiceName>
+        <DefaultCategory>Service</DefaultCategory>
+        <FailureLoggerName>failure</FailureLoggerName>
+    </appender>
+
+    <root level="${service.logging.level:-debug}">
+        <appender-ref ref="file" />
+        <appender-ref ref="console" />
+        <appender-ref ref="service" />
+    </root>
+</configuration>

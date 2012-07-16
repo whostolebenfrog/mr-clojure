@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="com:ovi:music:tools:configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="com:ovi:music:tools:configuration Configuration.xsd ">
+
+    <item name="service.status.path" defaultValue="/1.x/status" regex=".+">
+    </item>
+
+    <item name="service.logging.path" regex=".+" defaultValue="/usr/local/jetty/log">
+        <documentation>The location where the service should write its log files</documentation>
+    </item>
+
+    <item name="service.logging.level" defaultValue="warn" regex="(trace|debug|info|warn|error|all|off)">
+        <documentation>The overall logging level for the service. Defaults to warn.</documentation>
+    </item>
+
+    <item name="service.logging.consolethreshold" defaultValue="warn" regex="(trace|debug|info|warn|error|all|off)">
+        <documentation>The threshold at which the logger will log to the console. Defaults to warn.</documentation>
+    </item>
+
+    <item name="service.logging.filethreshold" defaultValue="info" regex="(trace|debug|info|warn|error|all|off)">
+        <documentation>The threshold at which the logger will log to the filesystem. Defaults to info.</documentation>
+    </item>
+
+    <item name="service.logging.servicethreshold" defaultValue="warn" regex="(trace|debug|info|warn|error|all|off)">
+        <documentation>The threshold at which the logger will log to the error logging service</documentation>
+    </item>
+
+    <item name="service.graphite.post.interval" defaultValue="5" regex="\d+">
+      <documentation>Interval for graphite metrics reporting</documentation>
+    </item>
+
+    <item name="service.graphite.post.unit" defaultValue="MINUTES" regex="\w+">
+      <documentation>Time unit for interval for graphite metrics reporting</documentation>
+    </item>
+
+    <item name="service.graphite.enabled" defaultValue="ENABLED" regex="(ENABLED|DISABLED)">
+      <documentation>Whether to enable graphite metrics reporting</documentation>
+    </item>
+
+    <item name="mongo.hosts" regex=".+">
+      <documentation>Mongo hosts. A comma seperated list of host:port</documentation>
+    </item>
+
+    <item name="mongo.connections.max" regex="\d+" defaultValue="100"/>
+    <item name="mongo.writeconcern.desired" regex="\d+" defaultValue="2"/>
+    <item name="mongo.writeconcern.desired.timeout" regex="\d+" defaultValue="500"/>
+    <item name="mongo.writeconcern.required" regex="\d+" defaultValue="1"/>
+    <item name="mongo.writeconcern.required.timeout" regex="\d+" defaultValue="2000"/>
+     
+</configuration>
