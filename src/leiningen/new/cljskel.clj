@@ -1,5 +1,5 @@
 (ns leiningen.new.cljskel
-  (:use [leiningen.new.templates :only [renderer name-to-path ->files]]))
+  (:use [leiningen.new.templates :only [renderer name-to-path ->files year]]))
 
 (def render (renderer "cljskel"))
 
