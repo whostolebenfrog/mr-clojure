@@ -14,6 +14,8 @@
               :sanitized (name-to-path name)
               :year (year)}]
     (->files data
+             ["project.clj" (render "project.clj" data)]
+             
              ["src/{{sanitized}}/setup.clj" (render "setup.clj" data)]
              ["src/{{sanitized}}/persistence.clj" (render "persistence.clj" data)]
              ["src/{{sanitized}}/core.clj" (render "core.clj" data)]
