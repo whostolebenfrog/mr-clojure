@@ -1,4 +1,4 @@
-(ns {{name}}.test.unit
+(ns {{name}}.unit
   (:use [{{name}}.core])
   (:use [clojure.test]))
 

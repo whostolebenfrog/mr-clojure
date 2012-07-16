@@ -2,16 +2,16 @@
   (:require [{{name}}.setup :as setup]
         [{{name}}.core :as core]
         [{{name}}.persistence :as persist])
-  (:require [compojure.core]
+  (:require [compojure.core :refer [defroutes GET PUT POST]]
         [compojure.route :as route]
-        [ring.adapter.jetty :as jetty :only [run-jetty]]
-        [ring.middleware.format-params :only [wrap-restful-params]]
-        [ring.middleware.format-response :only [wrap-restful-response]]
-        [ring.middleware.params :only [wrap-params]]
-        [clojure.data.xml :only [element emit-str]]
-        [clojure.string :only (split)]
-        [clojure.data.json :as json :only [json-str]]
-        [clojure.tools.logging :only (info warn error)])
+        [ring.adapter.jetty :as jetty :refer [run-jetty]]
+        [ring.middleware.format-params :refer [wrap-restful-params]]
+        [ring.middleware.format-response :refer [wrap-restful-response]]
+        [ring.middleware.params :refer [wrap-params]]
+        [clojure.data.xml :refer [element emit-str]]
+        [clojure.string :refer [split]]
+        [clojure.data.json :as json :refer [json-str]]
+        [clojure.tools.logging :refer [info warn error]])
   (:import java.io.StringWriter)
   (:import java.io.PrintWriter)
   (:gen-class))

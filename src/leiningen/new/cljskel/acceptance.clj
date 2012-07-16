@@ -1,4 +1,4 @@
-(ns {{name}}.test.acceptance
+(ns {{name}}.acceptance
   (:use [{{name}}.web :as web])
   (:use midje.sweet)
   (:use clojure.test)
