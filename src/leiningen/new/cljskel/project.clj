@@ -24,7 +24,8 @@
   :profiles {:dev {:plugins [[lein-rpm "0.0.4"]]}}
   :plugins [[lein-ring "0.7.0"]
             [lein-embongo "0.1.1"]
-            [lein-release "1.0.73"]]
+            [lein-release "1.0.73"]
+            [lein-midje "2.0.0-SNAPSHOT"]]
   :jvm-opts ["-Dconfig=./resources/local.properties"]
 
   :test-selectors {:default :unit
