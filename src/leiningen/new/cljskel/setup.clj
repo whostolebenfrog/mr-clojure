@@ -128,25 +128,40 @@
     true
     (catch Exception e (warn e) false)))
 
+(defn get-last-error [db concern]
+  (let [last-error (.getLastError (mc/get-db) concern)]
+    {:server-used (.toString (.get last-error "serverUsed"))
+     :ok (.ok last-error)
+     :updated-existing (.get last-error "updatedExisting")
+     :n (.get last-error "n")
+     :connection-id (.get last-error "connectionId")
+     :wtime (.get last-error "wtime")
+     :error-message (.getErrorMessage last-error)
+     :exception (.getException last-error)}))
+
 (defn write-error-message [concern error]
-  (format  "Write concern %s was not met within %dms, mongo error message: %s"
+  (format "Write concern %s was not met within %dms, mongo error message: %s"
            (.getWString concern) (.getWtimeout concern) (.getErrorMessage error)))
 
-(defn get-if-error [concern]
-  (let [cmd-res (.getLastError (mc/get-db) concern)]
-    (if (not (.ok cmd-res))
-      cmd-res)))
+(defn throw-mongo-excep [error-msg]
+  (throw (MongoException. error-msg)))
+
+(defn check-write-concern [concern fail-func]
+  (let [last-error (get-last-error (mc/get-db) concern)]
+    (if (:ok last-error)
+      last-error
+      (fail-func (write-error-message concern last-error)))))
 
 (defn check-write-concerns []
-  (if-let [desired-error (get-if-error @desired-concern)]
-    (do (warn (write-error-message @desired-concern desired-error))
-        (if-let [required-error (get-if-error @required-concern)]
-          (throw (MongoException. (write-error-message @required-concern required-error)))))))
+  (if-let [first-success (check-write-concern @desired-concern #(warn %))]
+    first-success
+    (if-let [second-success (check-write-concern @required-concern throw-mongo-excep)]
+      second-success)))
 
-(defn safe-insert [coll doc]
-  (let [db (mc/get-db)]
-    (try
-      (do (.requestEnsureConnection db)
-       (mco/insert coll doc)
-       (check-write-concerns))
-      (finally (.requestDone db)))))
+(defn perform-safe [mongo-call]
+  (let [db (monger.core/get-db)]
+     (try
+       (do (.requestEnsureConnection db)
+           (mongo-call)
+           (inbox.setup/check-write-concerns))
+       (finally (.requestDone db)))))
