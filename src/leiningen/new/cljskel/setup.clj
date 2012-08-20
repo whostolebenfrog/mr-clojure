@@ -163,5 +163,5 @@
      (try
        (do (.requestEnsureConnection db)
            (mongo-call)
-           (inbox.setup/check-write-concerns))
+           (check-write-concerns))
        (finally (.requestDone db)))))
