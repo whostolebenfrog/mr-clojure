@@ -10,7 +10,7 @@
 
 (def host (get (System/getenv) "HOST" "localhost"))
 (def port (Integer. (get (System/getenv) "JETTY_PORT" 8080)))
-(def base-url (str "http://" host ":" port "/1.x/"))
+(def base-url (System/getProperty "service.url" (str "http://localhost:" port "/1.x/")))
 
 (defn url+ [& suffix] (apply str base-url suffix))
 
