@@ -49,16 +49,14 @@
   (if @started?
     (web/stop)))
 
-(deftest ^:acceptance tests
- (against-background
-  [(before :contents (start-service) :after (stop-service))]
+(against-background
+ [(before :contents (start-service) :after (stop-service))]
 
-  (fact "Ping resource returns 200 HTTP response"
-        (let [response (ping)]
-          response => (contains {:status 200})))
+ (fact "Ping resource returns 200 HTTP response"
+       (let [response (ping)]
+         response => (contains {:status 200})))
 
-  (fact "Status returns all required elements"
-        (let [response (client/get (url+ "status") {:throw-exceptions false})
-              body (read-xml-body response)]
-          response => (contains {:status 200})))
-  ))
+ (fact "Status returns all required elements"
+       (let [response (client/get (url+ "status") {:throw-exceptions false})
+             body (read-xml-body response)]
+         response => (contains {:status 200}))))
