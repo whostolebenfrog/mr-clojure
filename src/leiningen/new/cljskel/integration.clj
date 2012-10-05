@@ -1,4 +1,4 @@
-(ns {{name}}.acceptance
+(ns {{name}}.integration
   (:require [{{name}}.web :as web])
 
   (:require [clj-http.client :as client]
@@ -6,12 +6,9 @@
             [clojure.test :refer :all]
             [clojure.data.json :as json]
             [clojure.data.zip.xml :as xml]
-            [rest-cljer.core :refer [rest-driven]]
             [environ.core :refer [env]])
 
   (:import [java.util UUID]
-           [com.github.restdriver.clientdriver ClientDriverFactory ClientDriverRule]
-           [com.github.restdriver.clientdriver RestClientDriver ClientDriverRequest$Method]
            [java.util.regex Pattern]))
 
 (defn url+ [& suffix] (apply str
@@ -26,7 +23,7 @@
 
 
 
-(deftest ^:acceptance tests
+(deftest ^:integration tests
          (fact "Ping resource returns 200 HTTP response"
                (let [response (client/get (url+ "ping")  {:throw-exceptions false})]
                  response => (contains {:status 200})))

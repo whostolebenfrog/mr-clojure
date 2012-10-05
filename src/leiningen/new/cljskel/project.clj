@@ -2,7 +2,7 @@
   :description "Service {{name}}"
   :url "Fix me"
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [compojure "1.1.0"]
+                 [compojure "1.1.3"]
                  [ring-middleware-format "0.1.1"]
                  [org.clojure/data.xml "0.0.4"]
                  [org.clojure/data.json "0.1.2"]
@@ -13,32 +13,52 @@
                  [ch.qos.logback/logback-classic "1.0.3"]
                  [com.ovi.common.logging/logback-appender "0.0.32"]
                  [com.yammer.metrics/metrics-logback "2.1.1"]
-                 [com.ovi.common.metrics/metrics-graphite "2.1.4"]
-                 [com.novemberain/monger "1.1.0"]
-                 [clj-http "0.4.2"]
-                 [com.github.rest-driver/rest-client-driver "1.1.22" :exclusions [org.slf4j/slf4j-nop]]
-                 [junit "4.10"]
+                 [com.ovi.common.metrics/metrics-graphite "2.1.12"]
+                 [clj-http "0.5.2"]
+                 [cheshire "4.0.1"]
+                 [clj-time "0.4.3"]
                  [midje "1.4.0"]
+                 [environ "0.3.0"]
+                 [nokia/ring-utils "0.1.2"]
+                 [rest-cljer "0.1.2"]
                  [ring/ring-jetty-adapter "1.1.0"]]
 
-  :profiles {:dev {:plugins [[lein-rpm "0.0.4"]]}}
-  :plugins [[lein-ring "0.7.0"]
-            [lein-embongo "0.1.1"]
-            [lein-release "1.0.73"]
-            [lein-midje "2.0.0-SNAPSHOT"]]
-  :jvm-opts ["-Dconfig=./resources/local.properties"]
+  :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.22" :exclusions [org.slf4j/slf4j-nop]]
+                                  [junit "4.10"]
+                                  [clj-http-fake "0.4.1"]]
+                   :plugins [[lein-rpm "0.0.4"]
+                             [lein-midje "2.0.0-SNAPSHOT"]]}}
+  :plugins [[lein-ring "0.7.3"]
+            [environ/environ.lein "0.3.0"]
+            [lein-release "1.0.73"]]
+
+  :hooks [environ.leiningen.hooks]
+
+  ;; development token values
+  :env {
+        :environment-name "Dev"
+        :service-name {{name}}
+        :service-port "3000"
+        :service-url "http://localhost:%s/1.x/"
+        :restdriver-port "8081"
+        :environment-entertainment-graphite-host "graphite.brislabs.com"
+        :environment-entertainment-graphite-port "8080"
+        :service-graphite-post-interval "1"
+        :service-graphite-post-unit "MINUTES"
+        :service-graphite-enabled "ENABLED"
+        }
 
   :test-selectors {:default :unit
                    :unit :unit
                    :acceptance :acceptance
-                   :all (constantly true)}
+                   :integration :integration}
 
   :lein-release {:release-tasks [:clean :uberjar :pom :rpm]
                  :clojars-url "clojars@clojars.mobile.lnx.nokia.com:"}
 
-  :mongo-port ~(Integer. (get (System/getenv) "MONGO_PORT" 27017))
   :ring {:handler {{name}}.web/app
          :main {{name}}.web
+         :port ~(Integer.  (get (System/getenv) "SERVICE_PORT" "3000"))
          :init {{name}}.setup/setup}
 
   :repositories {"internal-clojars"
@@ -47,6 +67,7 @@
                  "http://rm.brislabs.com/nexus/content/groups/all-releases"}
 
   :uberjar-name "{{upper-name}}.jar"
+
   :rpm {:name "{{upper-name}}1"
         :summary "RPM for {{upper-name}} service"
         :copyright "Nokia {{year}}"
@@ -74,4 +95,5 @@
                     :groupname "jetty"
                     :sources {:source [{:location "scripts/service/jetty"}]}}]}
   :main {{name}}.web
+
   )

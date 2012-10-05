@@ -15,16 +15,17 @@
               :year (year)}]
     (->files data
              ["project.clj" (render "project.clj" data)]
-
-             ["resources/local.properties" (render "local.properties" data)]
-             
+             ["all" (render "all" data)]
+             ["acceptance" (render "acceptance" data)]
+             ["integration" (render "integration" data)]
              ["src/{{sanitized}}/setup.clj" (render "setup.clj" data)]
-             ["src/{{sanitized}}/persistence.clj" (render "persistence.clj" data)]
-             ["src/{{sanitized}}/core.clj" (render "core.clj" data)]
              ["src/{{sanitized}}/web.clj" (render "web.clj" data)]
+             ["test/{{sanitized}}/web_unit.clj" (render "web_unit.clj" data)]
+             ["resources/logback.xml" (render "logback.xml" data)]
 
-             ["test/{{sanitized}}/unit.clj" (render "unit.clj" data)]
              ["test/{{sanitized}}/acceptance.clj" (render "acceptance.clj" data)]
+             ["test/{{sanitized}}/integration.clj" (render "integration.clj" data)]
+
 
              ["configuration/ComponentManifest.xml" (render "ComponentManifest.xml" data)]
              ["configuration/configuration.xml" (render "configuration.xml" data)]
@@ -33,7 +34,7 @@
              ["scripts/bin/stop.sh" (render "stop.sh" data)]
 
              ["scripts/dmt/post_install" (render "post_install" data)]
-             
+
              ["scripts/rpm/postinstall.sh" (render "postinstall.sh" data)]
              ["scripts/rpm/postremove.sh" (render "postremove.sh" data)]
              ["scripts/rpm/preinstall.sh" (render "preinstall.sh" data)]

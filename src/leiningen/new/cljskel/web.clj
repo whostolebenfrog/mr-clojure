@@ -1,79 +1,61 @@
 (ns {{name}}.web
-  (:require [{{name}}.setup :as setup]
-        [{{name}}.core :as core]
-        [{{name}}.persistence :as persist])
-  (:require [compojure.core :refer [defroutes GET PUT POST]]
-        [compojure.route :as route]
-        [ring.adapter.jetty :as jetty :refer [run-jetty]]
-        [ring.middleware.format-params :refer [wrap-restful-params]]
-        [ring.middleware.format-response :refer [wrap-restful-response]]
-        [ring.middleware.params :refer [wrap-params]]
-        [clojure.data.xml :refer [element emit-str]]
-        [clojure.string :refer [split]]
-        [clojure.data.json :as json :refer [json-str]]
-        [clojure.tools.logging :refer [info warn error]])
-  (:import java.io.StringWriter)
-  (:import java.io.PrintWriter)
+    (:require [{{name}}.setup :as setup]
+              )
+    (:require [compojure.core :refer [defroutes GET PUT POST DELETE]]
+              [compojure.route :as route]
+              [compojure.handler :as handler]
+              [ring.adapter.jetty :as jetty :refer [run-jetty]]
+              [ring.middleware.format-response :refer [wrap-restful-response]]
+              [ring.middleware.params :refer [wrap-params]]
+              [ring.middleware.keyword-params :refer [wrap-keyword-params]]
+              [clojure.data.xml :refer [element emit-str]]
+              [clojure.string :refer [split]]
+              [clojure.tools.logging :refer [info warn error]]
+              [environ.core :refer [env]]
+              [nokia.ring-utils.error :as error-utils]
+              [nokia.ring-utils.metrics :as metrics-utils])
   (:gen-class))
 
-(defn response [data & [status]]
+
+(defn response [data content-type & [status]]
   {:status (or status 200)
-   :headers {"Content-Type" "application/json"}
+   :headers {"Content-Type" content-type}
    :body data})
 
 (defn error-response  [msg & [status]]
   (let [s (or status 404)]
-    (response {:message msg :status s} s)))
+    (response {:message msg :status s} "application/json" s)))
 
-(defn excep-response
-  [^Exception e]
-  (let [sw (new StringWriter)]
-    (.printStackTrace e (new PrintWriter sw))
-    (error-response (str sw) 500)))
+(defn status
+  []
+  {:headers {"Content-Type" "application/xml"}
+   :body    (emit-str (element :status
+                               {:serviceName "{{name}}"
+                                :version @setup/version
+                                :success true}))})
 
-(def default-paging-params {:start-index "0"
-                            :items-per-page "10"})
+(defroutes routes
 
-(defn paging [start-index items-per-page]
-  {:start-index (Integer/parseInt
-                 (or start-index (:start-index default-paging-params)))
-   :items-per-page (Integer/parseInt
-                    (or items-per-page (:items-per-page default-paging-params)))})
+  (GET "/1.x/ping"
+      [] "pong")
 
-(defroutes handler
-  (GET "/1.x/ping" []
-       (let [status 200]
-         {:status status
-          :headers {"Content-Type" "text/plain"}
-          :body "pong"}))
-
-  (GET "/1.x/status" []
-       (let [status 200, mongo-check (setup/check-mongo-connectivity)]
-         {:status status
-          :headers {"Content-Type" "application/xml"}
-          :body
-          (emit-str
-           (element :status {:serviceName "{{name}}":version (setup/version) :success mongo-check}
-                    (element :statusItem {:success mongo-check :name "MongoHealthCheck"})))}))
+  (GET "/1.x/status"
+      [] (status))
 
   (route/not-found (error-response "Page not found")))
 
-(defn error-handling [handler]
-  (fn [request]
-    (try
-      (handler request)
-      (catch Throwable e
-        (error e)
-        (excep-response e)))))
 
 (def app
-  (->  (error-handling handler) wrap-restful-params wrap-params wrap-restful-response) )
+  (-> (error-utils/error-handling-middleware routes)
+      wrap-keyword-params
+      wrap-params
+      wrap-restful-response
+      metrics-utils/per-resource-metrics-middleware))
 
 (def server (atom nil))
 
 (defn start-server []
-  (jetty/run-jetty #'app {:port @setup/service-port :join? false}))
-
+  (jetty/run-jetty #'app {:port (Integer. (env :service-port)) :join? false}))
 
 (defn start []
   (do

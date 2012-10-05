@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Override properties here like
+# export service_oauth_enabled="true"
+
+export TIMEOUT=300
+
+if [ "$1" != "wait" ]
+then
+    lein trampoline ring server-headless&
+    PID=$!
+
+    echo "**********\nGiving lein $TIMEOUT seconds to build and start the application...\n**********"
+    for i in `seq 1 $TIMEOUT`; do if [ `netstat -nl 2>/dev/null | grep \:${SERVICE_PORT:="3000"} | wc -l` -gt 0 ]; then break; fi; sleep 1; done;
+    if [ `netstat -nl 2>/dev/null | grep \:${SERVICE_PORT:="3000"} | wc -l` -lt 1 ]; then echo "Jetty failed to start, it was not reachable on port ${SERVICE_PORT:="3000"} within $TIMEOUT seconds"; exit 1; fi
+
+    lein test :integration
+    it_res=$?
+
+    kill $PID
+
+    exit $it_res
+else
+    lein ring server-headless
+fi
