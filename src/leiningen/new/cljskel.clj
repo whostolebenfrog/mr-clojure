@@ -18,6 +18,7 @@
              ["all" (render "all" data)]
              ["acceptance" (render "acceptance" data)]
              ["integration" (render "integration" data)]
+             [".gitignore" (render ".gitignore" data)]
              ["src/{{sanitized}}/setup.clj" (render "setup.clj" data)]
              ["src/{{sanitized}}/web.clj" (render "web.clj" data)]
              ["test/{{sanitized}}/web_unit.clj" (render "web_unit.clj" data)]
