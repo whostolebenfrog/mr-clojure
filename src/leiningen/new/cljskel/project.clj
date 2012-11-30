@@ -27,7 +27,8 @@
                                   [junit "4.10"]
                                   [clj-http-fake "0.4.1"]]
                    :plugins [[lein-rpm "0.0.4"]
-                             [lein-midje "2.0.0-SNAPSHOT"]]}}
+                             [lein-midje "2.0.0-SNAPSHOT"]
+                             [jonase/kibit "0.0.4"]]}}
   :plugins [[lein-ring "0.7.3"]
             [environ/environ.lein "0.3.0"]
             [lein-release "1.0.73"]]
