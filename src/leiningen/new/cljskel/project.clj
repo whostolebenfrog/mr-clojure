@@ -1,6 +1,6 @@
 (defproject {{name}} "1.0.0-SNAPSHOT"
-  :description "Service {{name}}"
-  :url "Fix me"
+  :description "{{upper-name}} service"
+  :url "http://wikis.in.nokia.com/NokiaMusicArchitecture/{{upper-name}}"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [compojure "1.1.3"]
                  [ring-middleware-format "0.1.1"]
