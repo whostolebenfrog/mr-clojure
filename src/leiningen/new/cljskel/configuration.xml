@@ -47,5 +47,9 @@
     <item name="mongo.writeconcern.desired.timeout" regex="\d+" defaultValue="500"/>
     <item name="mongo.writeconcern.required" regex="\d+" defaultValue="1"/>
     <item name="mongo.writeconcern.required.timeout" regex="\d+" defaultValue="2000"/>
+
+    <item name="service.production" regex="(true|false)" defaultValue="true">
+        <documentation>Switch on production mode - disable reloading and strack traces from leaving the application</documentation>
+    </item>
      
 </configuration>

@@ -47,6 +47,7 @@
         :service-graphite-post-interval "1"
         :service-graphite-post-unit "MINUTES"
         :service-graphite-enabled "ENABLED"
+        :service-production "false"
         }
 
   :test-selectors {:default :unit

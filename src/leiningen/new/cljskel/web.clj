@@ -55,7 +55,10 @@
 (def server (atom nil))
 
 (defn start-server []
-  (jetty/run-jetty #'app {:port (Integer. (env :service-port)) :join? false}))
+  (jetty/run-jetty #'app {:port (Integer. (env :service-port))
+                          :join? false
+                          :stacktraces? (not (boolean (Boolean. (env :service-production))))
+                          :auto-reload? (not (boolean (Boolean. (env :service-production))))}))
 
 (defn start []
   (do
