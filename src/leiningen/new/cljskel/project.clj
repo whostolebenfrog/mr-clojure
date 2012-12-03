@@ -56,7 +56,7 @@
                    :integration :integration}
 
   :lein-release {:release-tasks [:clean :uberjar :pom :rpm]
-                 :clojars-url "clojars@clojars.mobile.lnx.nokia.com:"}
+                 :clojars-url "clojars@clojars.brislabs.com:"}
 
   :ring {:handler {{name}}.web/app
          :main {{name}}.web
@@ -64,7 +64,7 @@
          :init {{name}}.setup/setup}
 
   :repositories {"internal-clojars"
-                 "http://clojars.mobile.lnx.nokia.com/repo"
+                 "http://clojars.brislabs.com/repo"
                  "rm.brislabs.com"
                  "http://rm.brislabs.com/nexus/content/groups/all-releases"}
 
