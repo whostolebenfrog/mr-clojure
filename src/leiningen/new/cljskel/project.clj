@@ -17,18 +17,18 @@
                  [clj-http "0.5.2"]
                  [cheshire "4.0.1"]
                  [clj-time "0.4.3"]
-                 [midje "1.4.0"]
                  [environ "0.3.0"]
                  [nokia/ring-utils "0.1.2"]
-                 [rest-cljer "0.1.2"]
                  [ring/ring-jetty-adapter "1.1.0"]]
 
   :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.22" :exclusions [org.slf4j/slf4j-nop]]
                                   [junit "4.10"]
-                                  [clj-http-fake "0.4.1"]]
+                                  [clj-http-fake "0.4.1"]
+                                  [rest-cljer "0.1.2"]
+                                  [midje "1.4.0"]]
                    :plugins [[lein-rpm "0.0.4"]
-                             [lein-midje "2.0.0-SNAPSHOT"]
-                             [jonase/kibit "0.0.4"]]}}
+                             [lein-midje "2.0.3"]]}}
+
   :plugins [[lein-ring "0.7.3"]
             [environ/environ.lein "0.3.0"]
             [lein-release "1.0.73"]]
@@ -96,6 +96,5 @@
                     :username "jetty"
                     :groupname "jetty"
                     :sources {:source [{:location "scripts/service/jetty"}]}}]}
-  :main {{name}}.web
 
-  )
+  :main {{name}}.web)
