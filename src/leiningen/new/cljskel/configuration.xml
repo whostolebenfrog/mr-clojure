@@ -3,6 +3,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="com:ovi:music:tools:configuration Configuration.xsd ">
 
+    <item name="service.name" defaultValue="ClojureSkeleton" regex=".+">
+        <documentation>The name of this service, use for posting metrics and logging.</documentation>
+    </item>
+
+    <item name="service.port" defaultValue="8080" regex="\d+">
+        <documentation>The port used by Jetty to expose this service</documentation>
+    </item>
+
     <item name="service.status.path" defaultValue="/1.x/status" regex=".+">
     </item>
 
