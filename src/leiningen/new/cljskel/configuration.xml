@@ -47,7 +47,7 @@
     </item>
 
     <item name="service.production" regex="(true|false)" defaultValue="true">
-        <documentation>Switch on production mode - disable reloading and strack traces from leaving the application</documentation>
+        <documentation>Switch on production mode - disable reloading and stack traces from leaving the application</documentation>
     </item>
      
 </configuration>
