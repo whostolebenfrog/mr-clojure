@@ -1,8 +1,7 @@
 (ns {{name}}.web_unit
-  (:use [{{name}}.web])
-  (:use [clojure.test])
-  (:use midje.sweet))
-
+  (:use [{{name}}.web]
+        [clojure.test]
+        [midje.sweet]))
 
 (defn request [method resource]
   (routes {:request-method method
