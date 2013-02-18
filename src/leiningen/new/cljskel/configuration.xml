@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="com:ovi:music:tools:configuration Configuration.xsd ">
 
-    <item name="service.name" defaultValue="ClojureSkeleton" regex=".+">
+    <item name="service.name" defaultValue="{{name}}" regex=".+">
         <documentation>The name of this service, use for posting metrics and logging.</documentation>
     </item>
 
