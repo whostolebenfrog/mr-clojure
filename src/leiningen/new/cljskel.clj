@@ -16,6 +16,7 @@
     (->files data
              ["project.clj" (render "project.clj" data)]
              ["all" (render "all" data)]
+             ["test_helper.sh" (render "test_helper.sh" data)]
              ["acceptance" (render "acceptance" data)]
              ["integration" (render "integration" data)]
              [".gitignore" (render ".gitignore" data)]

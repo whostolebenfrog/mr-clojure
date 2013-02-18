@@ -1,46 +1,50 @@
-#!/bin/sh
+#!/bin/bash
+
+exit_if_fail () {
+    if [ $? -ne 0 ]
+    then
+        echo -e "\e[31m"
+        echo ""
+        echo "     FAIL WHALE!"
+        echo -e "\e[34m"
+        echo ""
+        echo "W     W      W        "
+        echo "W        W  W     W    "
+        echo "              '.  W      "
+        echo "  .-\"\"-._     \ \.--|  "
+        echo " /       \"-..__) .-'   "
+        echo "|     _         /      "
+        echo "\\'-.__,   .__.,'       "
+        echo " \`'----'._\\--'      "
+        echo ""
+        echo "$1 test failure! Why would you even write something like that?"
+        echo -e "\e[0m"
+        exit 1
+    fi
+}
 
 echo "Running unit tests"
 
-lein test :unit
-ut_res=$?
+lein midje :filter unit
+exit_if_fail Unit
 
 echo "Running integration tests"
 
-# Override properties here like
-# export service_oauth_enabled="true"
-export TIMEOUT=300
-
-lein trampoline ring server-headless&
-PID=$!
-
-echo "**********\nGiving lein $TIMEOUT seconds to build and start the application...\n**********"
-for i in `seq 1 $TIMEOUT`; do if [ `netstat -nl 2>/dev/null | grep \:${SERVICE_PORT:="3000"} | wc -l` -gt 0 ]; then break; fi; sleep 1; done;
-if [ `netstat -nl 2>/dev/null | grep \:${SERVICE_PORT:="3000"} | wc -l` -lt 1 ]; then echo "Jetty failed to start, it was not reachable on port ${SERVICE_PORT:="3000"} within $TIMEOUT seconds"; exit 1; fi
-
-lein test :integration
-it_res=$?
-
-kill $PID
+./integration
+exit_if_fail Integration
 
 sleep 1
 
 echo "Running acceptance tests"
 
-# Override properties here like
-# export service_oauth_enabled="false"
-# export environment_music_scrobbling1_baseurl="http://localhost:${RESTDRIVER_PORT:="8081"}"
+./acceptance
+exit_if_fail Acceptance
 
-lein trampoline ring server-headless&
-PID=$!
+sleep 1
 
-echo "**********\nGiving lein $TIMEOUT seconds to build and start the application...\n**********"
-for i in `seq 1 $TIMEOUT`; do if [ `netstat -nl 2>/dev/null | grep \:${SERVICE_PORT:="3000"} | wc -l` -gt 0 ]; then break; fi; sleep 1; done;
-if [ `netstat -nl 2>/dev/null | grep \:${SERVICE_PORT:="3000"} | wc -l` -lt 1 ]; then echo "Jetty failed to start, it was not reachable on port ${SERVICE_PORT:="3000"} within $TIMEOUT seconds"; exit 1; fi
+echo "Running security acceptance tests"
 
-lein test :acceptance
-at_res=$?
+./sec-acceptance
+exit_if_fail "Security acceptance"
 
-kill $PID
-
-exit `expr $ut_res + $it_res + $at_res`
+exit 0
