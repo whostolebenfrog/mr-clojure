@@ -2,7 +2,9 @@
   (:require [environ.core :refer [env]]
             [clojure.string :as cs :only (split)]
             [clojure.tools.logging :refer (info warn error)]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            [nokia.adapter.instrumented-jetty :as instrumented]
+            [{{name}}.web :as web])
 
   (:import (java.lang Integer Throwable)
            (java.util.logging LogManager)
@@ -44,5 +46,24 @@
            "localhost")))
 
 (defn setup []
+  (web/set-version! @version)
   (configure-logging)
   (start-graphite-reporting))
+
+(def server (atom nil))
+
+(defn start-server []
+  (instrumented/run-jetty #'web/app {:port (Integer. (env :service-port))
+                                     :join? false
+                                     :stacktraces? (not (Boolean/valueOf (env :service-production)))
+                                     :auto-reload? (not (Boolean/valueOf (env :service-production)))}))
+
+(defn start []
+  (do
+    (setup)
+    (reset! server (start-server))))
+
+(defn stop [] (if-let [server @server] (.stop server)))
+
+(defn -main [& args]
+  (start))

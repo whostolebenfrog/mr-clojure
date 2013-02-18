@@ -1,10 +1,7 @@
 (ns {{name}}.web
-    (:require [{{name}}.setup :as setup]
-              )
     (:require [compojure.core :refer [defroutes GET PUT POST DELETE]]
               [compojure.route :as route]
               [compojure.handler :as handler]
-              [nokia.adapter.instrumented-jetty :as instrumented]
               [ring.middleware.format-response :refer [wrap-restful-response]]
               [ring.middleware.params :refer [wrap-params]]
               [ring.middleware.keyword-params :refer [wrap-keyword-params]]
@@ -16,6 +13,9 @@
               [nokia.ring-utils.metrics :as metrics-utils])
   (:gen-class))
 
+(def ^:dynamic *version* "none")
+(defn set-version! [version]
+  (alter-var-root #'*version* (fn [_] version)))
 
 (defn response [data content-type & [status]]
   {:status (or status 200)
@@ -31,7 +31,7 @@
   {:headers {"Content-Type" "application/xml"}
    :body    (emit-str (element :status
                                {:serviceName "{{name}}"
-                                :version @setup/version
+                                :version *version*
                                 :success true}))})
 
 (defroutes routes
@@ -51,20 +51,3 @@
       wrap-params
       wrap-restful-response
       metrics-utils/per-resource-metrics-middleware))
-
-(def server (atom nil))
-
-(defn start-server []
-  (instrumented/run-jetty #'app {:port (Integer. (env :service-port))
-                                 :join? false
-                                 :stacktraces? (not (boolean (Boolean. (env :service-production))))
-                                 :auto-reload? (not (boolean (Boolean. (env :service-production))))}))
-
-(defn start []
-  (do
-    (setup/setup)
-    (reset! server (start-server))))
-
-(defn stop [] (if-let [server @server] (.stop server)))
-
-(defn -main [& args] (start))

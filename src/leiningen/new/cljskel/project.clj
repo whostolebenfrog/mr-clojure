@@ -60,7 +60,7 @@
                  :clojars-url "clojars@clojars.brislabs.com:"}
 
   :ring {:handler {{name}}.web/app
-         :main {{name}}.web
+         :main {{name}}.setup
          :port ~(Integer.  (get (System/getenv) "SERVICE_PORT" "3000"))
          :init {{name}}.setup/setup}
 
@@ -98,4 +98,4 @@
                     :groupname "jetty"
                     :sources {:source [{:location "scripts/service/jetty"}]}}]}
 
-  :main {{name}}.web)
+  :main {{name}}.setup)
