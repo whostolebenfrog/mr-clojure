@@ -42,9 +42,4 @@ exit_if_fail Acceptance
 
 sleep 1
 
-echo "Running security acceptance tests"
-
-./sec-acceptance
-exit_if_fail "Security acceptance"
-
 exit 0

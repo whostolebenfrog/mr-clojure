@@ -4,7 +4,7 @@
     (:require [compojure.core :refer [defroutes GET PUT POST DELETE]]
               [compojure.route :as route]
               [compojure.handler :as handler]
-              [ring.adapter.jetty :as jetty :refer [run-jetty]]
+              [nokia.adapter.instrumented-jetty :as instrumented]
               [ring.middleware.format-response :refer [wrap-restful-response]]
               [ring.middleware.params :refer [wrap-params]]
               [ring.middleware.keyword-params :refer [wrap-keyword-params]]
@@ -55,10 +55,10 @@
 (def server (atom nil))
 
 (defn start-server []
-  (jetty/run-jetty #'app {:port (Integer. (env :service-port))
-                          :join? false
-                          :stacktraces? (not (boolean (Boolean. (env :service-production))))
-                          :auto-reload? (not (boolean (Boolean. (env :service-production))))}))
+  (instrumented/run-jetty #'app {:port (Integer. (env :service-port))
+                                 :join? false
+                                 :stacktraces? (not (boolean (Boolean. (env :service-production))))
+                                 :auto-reload? (not (boolean (Boolean. (env :service-production))))}))
 
 (defn start []
   (do

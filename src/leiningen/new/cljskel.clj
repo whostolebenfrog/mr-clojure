@@ -18,11 +18,11 @@
              ["all" (render "all" data)]
              ["test_helper.sh" (render "test_helper.sh" data)]
              ["acceptance" (render "acceptance" data)]
-             ["integration" (render "integration" data)]
+             ["integration" (render "acceptance" data)]
              [".gitignore" (render ".gitignore" data)]
              ["src/{{sanitized}}/setup.clj" (render "setup.clj" data)]
              ["src/{{sanitized}}/web.clj" (render "web.clj" data)]
-             ["test/{{sanitized}}/web_unit.clj" (render "web_unit.clj" data)]
+             ["test/{{sanitized}}/unit/web.clj" (render "web_unit.clj" data)]
              ["resources/logback.xml" (render "logback.xml" data)]
 
              ["test/{{sanitized}}/acceptance.clj" (render "acceptance.clj" data)]
