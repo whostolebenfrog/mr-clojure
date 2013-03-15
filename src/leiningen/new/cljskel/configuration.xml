@@ -34,7 +34,7 @@
         <documentation>The threshold at which the logger will log to the error logging service</documentation>
     </item>
 
-    <item name="service.graphite.post.interval" defaultValue="5" regex="\d+">
+    <item name="service.graphite.post.interval" defaultValue="1" regex="\d+">
       <documentation>Interval for graphite metrics reporting</documentation>
     </item>
 
