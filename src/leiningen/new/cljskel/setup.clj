@@ -24,7 +24,7 @@
 
 (defn configure-logging []
   (.reset (LogManager/getLogManager))
-                                        ;Route all java.util.logging log statements to slf4j
+  ;Route all java.util.logging log statements to slf4j
   (SLF4JBridgeHandler/install))
 
 (defn start-graphite-reporting []

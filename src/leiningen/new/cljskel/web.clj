@@ -2,7 +2,6 @@
     (:require [compojure.core :refer [defroutes context GET PUT POST DELETE]]
               [compojure.route :as route]
               [compojure.handler :as handler]
-              [ring.adapter.jetty :as jetty :refer [run-jetty]]
               [ring.middleware.format-response :refer [wrap-restful-response]]
               [ring.middleware.params :refer [wrap-params]]
               [ring.middleware.keyword-params :refer [wrap-keyword-params]]

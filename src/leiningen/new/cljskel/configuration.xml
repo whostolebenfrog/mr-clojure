@@ -3,6 +3,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="com:ovi:music:tools:configuration Configuration.xsd ">
 
+    <item name="service.name" defaultValue="{{name}}" regex=".+">
+        <documentation>The name of this service, use for posting metrics and logging.</documentation>
+    </item>
+
+    <item name="service.port" defaultValue="8080" regex="\d+">
+        <documentation>The port used by Jetty to expose this service</documentation>
+    </item>
+
     <item name="service.status.path" defaultValue="/1.x/status" regex=".+">
     </item>
 
@@ -38,18 +46,8 @@
       <documentation>Whether to enable graphite metrics reporting</documentation>
     </item>
 
-    <item name="mongo.hosts" regex=".+">
-      <documentation>Mongo hosts. A comma seperated list of host:port</documentation>
-    </item>
-
-    <item name="mongo.connections.max" regex="\d+" defaultValue="100"/>
-    <item name="mongo.writeconcern.desired" regex="\d+" defaultValue="2"/>
-    <item name="mongo.writeconcern.desired.timeout" regex="\d+" defaultValue="500"/>
-    <item name="mongo.writeconcern.required" regex="\d+" defaultValue="1"/>
-    <item name="mongo.writeconcern.required.timeout" regex="\d+" defaultValue="2000"/>
-
     <item name="service.production" regex="(true|false)" defaultValue="true">
-        <documentation>Switch on production mode - disable reloading and strack traces from leaving the application</documentation>
+        <documentation>Switch on production mode - disable reloading and stack traces from leaving the application</documentation>
     </item>
-     
+
 </configuration>
