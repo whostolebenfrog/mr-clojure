@@ -1,7 +1,5 @@
 (ns {{name}}.web
-    (:require [{{name}}.setup :as setup]
-              )
-    (:require [compojure.core :refer [defroutes GET PUT POST DELETE]]
+    (:require [compojure.core :refer [defroutes context GET PUT POST DELETE]]
               [compojure.route :as route]
               [compojure.handler :as handler]
               [ring.adapter.jetty :as jetty :refer [run-jetty]]
@@ -13,9 +11,11 @@
               [clojure.tools.logging :refer [info warn error]]
               [environ.core :refer [env]]
               [nokia.ring-utils.error :as error-utils]
-              [nokia.ring-utils.metrics :as metrics-utils])
-  (:gen-class))
+              [nokia.ring-utils.metrics :as metrics-utils]))
 
+(def ^:dynamic *version* "none")
+(defn set-version! [version]
+  (alter-var-root #'*version* (fn [_] version)))
 
 (defn response [data content-type & [status]]
   {:status (or status 200)
@@ -31,16 +31,18 @@
   {:headers {"Content-Type" "application/xml"}
    :body    (emit-str (element :status
                                {:serviceName "{{name}}"
-                                :version @setup/version
+                                :version *version*
                                 :success true}))})
 
 (defroutes routes
+  (context
+   "/1.x" []
 
-  (GET "/1.x/ping"
-      [] "pong")
+   (GET "/ping"
+        [] "pong")
 
-  (GET "/1.x/status"
-      [] (status))
+   (GET "/status"
+        [] (status)))
 
   (route/not-found (error-response "Page not found")))
 
@@ -51,20 +53,3 @@
       wrap-params
       wrap-restful-response
       metrics-utils/per-resource-metrics-middleware))
-
-(def server (atom nil))
-
-(defn start-server []
-  (jetty/run-jetty #'app {:port (Integer. (env :service-port))
-                          :join? false
-                          :stacktraces? (not (boolean (Boolean. (env :service-production))))
-                          :auto-reload? (not (boolean (Boolean. (env :service-production))))}))
-
-(defn start []
-  (do
-    (setup/setup)
-    (reset! server (start-server))))
-
-(defn stop [] (if-let [server @server] (.stop server)))
-
-(defn -main [& args] (start))

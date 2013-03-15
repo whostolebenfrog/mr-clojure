@@ -19,7 +19,7 @@
                  [clj-time "0.4.3"]
                  [environ "0.3.0"]
                  [nokia/ring-utils "0.1.2"]
-                 [ring/ring-jetty-adapter "1.1.0"]]
+                 [nokia/instrumented-ring-jetty-adapter "0.1.2"]]
 
   :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.22" :exclusions [org.slf4j/slf4j-nop]]
                                   [junit "4.10"]
@@ -40,7 +40,7 @@
         :environment-name "Dev"
         :service-name {{name}}
         :service-port "3000"
-        :service-url "http://localhost:%s/1.x/"
+        :service-url "http://localhost:%s/1.x"
         :restdriver-port "8081"
         :environment-entertainment-graphite-host "graphite.brislabs.com"
         :environment-entertainment-graphite-port "8080"
@@ -97,4 +97,4 @@
                     :groupname "jetty"
                     :sources {:source [{:location "scripts/service/jetty"}]}}]}
 
-  :main {{name}}.web)
+  :main {{name}}.setup)

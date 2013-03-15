@@ -1,27 +1,30 @@
 (ns {{name}}.setup
-  (:require [environ.core :refer [env]]
-            [clojure.string :as cs :only (split)]
-            [clojure.tools.logging :refer (info warn error)]
-            [clojure.java.io :as io])
+    (:require [{{name}}.web :as web]
+              [environ.core :refer [env]]
+              [clojure.string :as cs :only (split)]
+              [clojure.tools.logging :refer (info warn error)]
+              [nokia.adapter.instrumented-jetty :as instrumented]
+              [clojure.java.io :as io])
 
-  (:import (java.lang Integer Throwable)
-           (java.util.logging LogManager)
-           (com.yammer.metrics Metrics)
-           (com.yammer.metrics.core MetricName)
-           (com.ovi.common.metrics.graphite GraphiteReporterFactory GraphiteName ReporterState)
-           (com.ovi.common.metrics HostnameFactory)
-           (org.slf4j.bridge SLF4JBridgeHandler)
-           (java.util.concurrent TimeUnit)))
+    (:import (java.lang Integer Throwable)
+             (java.util.logging LogManager)
+             (com.yammer.metrics Metrics)
+             (com.yammer.metrics.core MetricName)
+             (com.ovi.common.metrics.graphite GraphiteReporterFactory GraphiteName ReporterState)
+             (com.ovi.common.metrics HostnameFactory)
+             (org.slf4j.bridge SLF4JBridgeHandler)
+             (java.util.concurrent TimeUnit))
+    (:gen-class))
 
 (defn read-file-to-properties [file-name]
   (with-open [^java.io.Reader reader (io/reader file-name)]
-        (let [props (java.util.Properties.)]
-          (.load props reader)
-          (into {} (for [[k v] props] [k v])))))
+    (let [props (java.util.Properties.)]
+      (.load props reader)
+      (into {} (for [[k v] props] [k v])))))
 
 (defn configure-logging []
   (.reset (LogManager/getLogManager))
-  ;Route all java.util.logging log statements to slf4j
+                                        ;Route all java.util.logging log statements to slf4j
   (SLF4JBridgeHandler/install))
 
 (defn start-graphite-reporting []
@@ -44,5 +47,24 @@
            "localhost")))
 
 (defn setup []
+  (web/set-version! @version)
   (configure-logging)
   (start-graphite-reporting))
+
+(def server (atom nil))
+
+(defn start-server []
+  (instrumented/run-jetty #'web/app {:port (Integer. (env :service-port))
+                                     :join? false
+                                     :stacktraces? (not (Boolean/valueOf (env :service-production)))
+                                     :auto-reload? (not (Boolean/valueOf (env :service-production)))}))
+
+(defn start []
+  (do
+    (setup)
+    (reset! server (start-server))))
+
+(defn stop [] (if-let [server @server] (.stop server)))
+
+(defn -main [& args]
+  (start))
