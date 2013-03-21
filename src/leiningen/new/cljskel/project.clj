@@ -5,7 +5,7 @@
                  [compojure "1.1.3" :exclusions [javax.servlet/servlet-api]]
                  [ring-middleware-format "0.1.1"]
                  [org.clojure/data.xml "0.0.4"]
-                 [org.clojure/data.json "0.1.2"]
+                 [org.clojure/data.json "0.2.1"]
                  [org.clojure/data.zip "0.1.1"]
                  [org.clojure/tools.logging "0.2.3"]
                  [org.slf4j/slf4j-api "1.6.4"]
@@ -15,13 +15,13 @@
                  [com.yammer.metrics/metrics-logback "2.1.1"]
                  [com.ovi.common.metrics/metrics-graphite "2.1.12"]
                  [clj-http "0.5.3"]
-                 [cheshire "5.0.1"]
+                 [cheshire "5.0.2"]
                  [clj-time "0.4.4"]
                  [environ "0.3.0"]
                  [nokia/ring-utils "0.1.2"]
                  [nokia/instrumented-ring-jetty-adapter "0.1.2"]]
 
-  :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.22"
+  :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.28"
                                    :exclusions [org.slf4j/slf4j-nop javax.servlet/servlet-api]]
                                   [junit "4.10"]
                                   [clj-http-fake "0.4.1"]
