@@ -12,6 +12,12 @@ cd ..
 lein new cljskel <your project name>
 ```
 
+Before trying to build your new project you will also need to ensure that leiningen does not use the proxy for pulling dependencies from Nexus:
+
+```
+export http_no_proxy=localhost|*.brislabs.com
+```
+
 ## License
 
 Copyright © 2012 Nokia
