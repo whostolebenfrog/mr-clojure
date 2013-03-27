@@ -51,11 +51,6 @@
         :service-production "false"
         }
 
-  :test-selectors {:default :unit
-                   :unit :unit
-                   :acceptance :acceptance
-                   :integration :integration}
-
   :lein-release {:release-tasks [:clean :uberjar :pom :rpm]
                  :clojars-url "clojars@clojars.brislabs.com:"}
 
