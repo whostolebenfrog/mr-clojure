@@ -8,9 +8,9 @@ wait_for_port () {
     port=$1
     timeout=$2
 
-    for i in `seq 1 $timeout`
+    for i in `seq 1 $TIMEOUT`
     do
-        if nc -w 1 localhost $port
+        if [ `netstat -nl 2>/dev/null | grep \:${SERVICE_PORT:="3000"} | wc -l` -gt 0 ]
         then
             return 0
         fi
