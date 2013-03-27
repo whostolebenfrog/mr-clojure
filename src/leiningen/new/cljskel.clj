@@ -18,7 +18,7 @@
              ["all" (render "all" data)]
              ["test_helper.sh" (render "test_helper.sh" data)]
              ["acceptance" (render "acceptance" data)]
-             ["integration" (render "acceptance" data)]
+             ["integration" (render "integration" data)]
              [".gitignore" (render ".gitignore" data)]
              ["src/{{sanitized}}/setup.clj" (render "setup.clj" data)]
              ["src/{{sanitized}}/web.clj" (render "web.clj" data)]
