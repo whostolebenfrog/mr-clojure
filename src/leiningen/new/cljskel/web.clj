@@ -10,7 +10,8 @@
               [clojure.tools.logging :refer [info warn error]]
               [environ.core :refer [env]]
               [nokia.ring-utils.error :refer [wrap-error-handling error-response]]
-              [nokia.ring-utils.metrics :refer [wrap-per-resource-metrics replace-outside-app]]
+              [nokia.ring-utils.metrics :refer [wrap-per-resource-metrics replace-outside-app
+                                                replace-guid replace-mongoid replace-number]]
               [nokia.ring-utils.ignore-trailing-slash :refer [wrap-ignore-trailing-slash]]))
 
 (def ^:dynamic *version* "none")
@@ -50,4 +51,4 @@
       (wrap-keyword-params)
       (wrap-params)
       (wrap-restful-response)
-      (wrap-per-resource-metrics [(replace-outside-app "/1.x")])))
+      (wrap-per-resource-metrics [replace-guid replace-mongoid replace-number (replace-outside-app "/1.x")])))
