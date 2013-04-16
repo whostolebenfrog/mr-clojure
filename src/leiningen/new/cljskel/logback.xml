@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
+  <!-- Suppress messages that may cause deadlock -->
+  <logger name="org.eclipse.jetty.webapp.WebAppClassLoader" level="off" />
+
   <!-- Properties should be provided as environ variables or the defaults will be used -->
 
   <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
