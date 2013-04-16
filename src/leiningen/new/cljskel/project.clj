@@ -18,7 +18,7 @@
                  [cheshire "5.0.2"]
                  [clj-time "0.4.4"]
                  [environ "0.3.0"]
-                 [nokia/ring-utils "0.1.2"]
+                 [nokia/ring-utils "1.0.0"]
                  [nokia/instrumented-ring-jetty-adapter "0.1.2"]]
 
   :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.28"

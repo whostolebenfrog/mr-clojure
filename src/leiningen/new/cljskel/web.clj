@@ -9,8 +9,9 @@
               [clojure.string :refer [split]]
               [clojure.tools.logging :refer [info warn error]]
               [environ.core :refer [env]]
-              [nokia.ring-utils.error :as error-utils]
-              [nokia.ring-utils.metrics :as metrics-utils]))
+              [nokia.ring-utils.error :refer [wrap-error-handling error-response]]
+              [nokia.ring-utils.metrics :refer [wrap-per-resource-metrics replace-outside-app]]
+              [nokia.ring-utils.ignore-trailing-slash :refer [wrap-ignore-trailing-slash]]))
 
 (def ^:dynamic *version* "none")
 (defn set-version! [version]
@@ -20,10 +21,6 @@
   {:status (or status 200)
    :headers {"Content-Type" content-type}
    :body data})
-
-(defn error-response  [msg & [status]]
-  (let [s (or status 404)]
-    (response {:message msg :status s} "application/json" s)))
 
 (defn status
   []
@@ -43,12 +40,14 @@
    (GET "/status"
         [] (status)))
 
-  (route/not-found (error-response "Page not found")))
+  (route/not-found (error-response "Resource not found" 404)))
 
 
 (def app
-  (-> (error-utils/error-handling-middleware routes)
-      wrap-keyword-params
-      wrap-params
-      wrap-restful-response
-      metrics-utils/per-resource-metrics-middleware))
+  (-> routes
+      (wrap-error-handling)
+      (wrap-ignore-trailing-slash)
+      (wrap-keyword-params)
+      (wrap-params)
+      (wrap-restful-response)
+      (wrap-per-resource-metrics [(replace-outside-app "/1.x")])))
