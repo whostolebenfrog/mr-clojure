@@ -3,7 +3,7 @@
   :url "http://wikis.in.nokia.com/NokiaMusicArchitecture/{{upper-name}}"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [compojure "1.1.3" :exclusions [javax.servlet/servlet-api]]
-                 [ring-middleware-format "0.1.1"]
+                 [ring-middleware-format "0.3.0"]
                  [org.clojure/data.xml "0.0.4"]
                  [org.clojure/data.json "0.2.1"]
                  [org.clojure/data.zip "0.1.1"]
