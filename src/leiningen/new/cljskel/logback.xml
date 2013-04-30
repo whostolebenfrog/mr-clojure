@@ -39,6 +39,10 @@
     <FailureLoggerName>failure</FailureLoggerName>
   </appender>
 
+  <logger name="failure" level="WARN" additivity="false">
+    <appender-ref ref="file" />
+  </logger>
+
   <root level="${SERVICE_LOGGING_LEVEL:-debug}">
     <appender-ref ref="file" />
     <appender-ref ref="console" />
