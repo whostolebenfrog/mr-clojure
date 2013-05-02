@@ -31,7 +31,7 @@
                    :plugins [[lein-rpm "0.0.4"]
                              [lein-midje "3.0-alpha4"]
                              [jonase/kibit "0.0.4"]]}}
-  :plugins [[lein-ring "0.7.3"]
+  :plugins [[lein-ring "0.8.5"]
             [lein-environ "0.4.0"]
             [lein-release "1.0.73"]]
 
@@ -56,7 +56,8 @@
   :ring {:handler {{name}}.web/app
          :main {{name}}.setup
          :port ~(Integer.  (get (System/getenv) "SERVICE_PORT" "3000"))
-         :init {{name}}.setup/setup}
+         :init {{name}}.setup/setup
+         :browser-uri "/1.x/status"}
 
   :repositories {"internal-clojars"
                  "http://clojars.brislabs.com/repo"
