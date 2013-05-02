@@ -17,7 +17,7 @@
                  [clj-http "0.5.3"]
                  [cheshire "5.0.2"]
                  [clj-time "0.4.4"]
-                 [environ "0.3.0"]
+                 [environ "0.4.0"]
                  [nokia/ring-utils "1.0.0"]
                  [metrics-clojure "1.0.1"]
                  [metrics-clojure-ring "1.0.1"]]
@@ -32,10 +32,8 @@
                              [lein-midje "3.0-alpha4"]
                              [jonase/kibit "0.0.4"]]}}
   :plugins [[lein-ring "0.7.3"]
-            [environ/environ.lein "0.3.0"]
+            [lein-environ "0.4.0"]
             [lein-release "1.0.73"]]
-
-  :hooks [environ.leiningen.hooks]
 
   ;; development token values
   :env {

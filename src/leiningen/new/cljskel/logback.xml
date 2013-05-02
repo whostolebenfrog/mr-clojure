@@ -4,7 +4,7 @@
   <!-- Suppress messages that may cause deadlock -->
   <logger name="org.eclipse.jetty.webapp.WebAppClassLoader" level="off" />
 
-  <!-- Properties should be provided as environ variables or the defaults will be used -->
+  <!-- Properties should be provided as environment variables or the defaults will be used -->
 
   <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
