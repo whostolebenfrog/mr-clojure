@@ -3,9 +3,8 @@
               [environ.core :refer [env]]
               [clojure.string :as cs :only (split)]
               [clojure.tools.logging :refer (info warn error)]
-              [nokia.adapter.instrumented-jetty :as instrumented]
-              [clojure.java.io :as io])
-
+              [clojure.java.io :as io]
+              [ring.adapter.jetty :refer [run-jetty]])
     (:import (java.lang Integer Throwable)
              (java.util.logging LogManager)
              (com.yammer.metrics Metrics)
@@ -54,10 +53,10 @@
 (def server (atom nil))
 
 (defn start-server []
-  (instrumented/run-jetty #'web/app {:port (Integer. (env :service-port))
-                                     :join? false
-                                     :stacktraces? (not (Boolean/valueOf (env :service-production)))
-                                     :auto-reload? (not (Boolean/valueOf (env :service-production)))}))
+  (run-jetty #'web/app {:port (Integer. (env :service-port))
+                        :join? false
+                        :stacktraces? (not (Boolean/valueOf (env :service-production)))
+                        :auto-reload? (not (Boolean/valueOf (env :service-production)))}))
 
 (defn start []
   (do

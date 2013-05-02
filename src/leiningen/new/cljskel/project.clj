@@ -19,7 +19,8 @@
                  [clj-time "0.4.4"]
                  [environ "0.3.0"]
                  [nokia/ring-utils "1.0.0"]
-                 [nokia/instrumented-ring-jetty-adapter "0.1.2"]]
+                 [metrics-clojure "1.0.1"]
+                 [metrics-clojure-ring "1.0.1"]]
 
   :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.28"
                                    :exclusions [org.slf4j/slf4j-nop javax.servlet/servlet-api]]
