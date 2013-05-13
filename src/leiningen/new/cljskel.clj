@@ -22,24 +22,21 @@
              [".gitignore" (render ".gitignore" data)]
              ["src/{{sanitized}}/setup.clj" (render "setup.clj" data)]
              ["src/{{sanitized}}/web.clj" (render "web.clj" data)]
-             ["test/{{sanitized}}/unit/web.clj" (render "web_unit.clj" data)]
              ["resources/logback.xml" (render "logback.xml" data)]
 
+             ["test/{{sanitized}}/unit/web.clj" (render "web_unit.clj" data)]
              ["test/{{sanitized}}/acceptance.clj" (render "acceptance.clj" data)]
              ["test/{{sanitized}}/integration.clj" (render "integration.clj" data)]
-
+             [".midje.clj" (render ".midje.clj" data)]
 
              ["configuration/ComponentManifest.xml" (render "ComponentManifest.xml" data)]
              ["configuration/configuration.xml" (render "configuration.xml" data)]
 
              ["scripts/bin/start.sh" (render "start.sh" data)]
              ["scripts/bin/stop.sh" (render "stop.sh" data)]
-
              ["scripts/dmt/post_install" (render "post_install" data)]
-
              ["scripts/rpm/postinstall.sh" (render "postinstall.sh" data)]
              ["scripts/rpm/postremove.sh" (render "postremove.sh" data)]
              ["scripts/rpm/preinstall.sh" (render "preinstall.sh" data)]
              ["scripts/rpm/preremove.sh" (render "preremove.sh" data)]
-
-             ["scripts/service/jetty" (render "jetty") data])))
+             ["scripts/service/jetty" (render "jetty" data)])))
