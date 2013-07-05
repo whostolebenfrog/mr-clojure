@@ -36,9 +36,8 @@
             [lein-release "1.0.73"]]
 
   ;; development token values
-  :env {
-        :environment-name "Dev"
-        :service-name {{name}}
+  :env {:environment-name "Dev"
+        :service-name "{{name}}"
         :service-port "3000"
         :service-url "http://localhost:%s/1.x"
         :restdriver-port "8081"
@@ -47,8 +46,7 @@
         :service-graphite-post-interval "1"
         :service-graphite-post-unit "MINUTES"
         :service-graphite-enabled "ENABLED"
-        :service-production "false"
-        }
+        :service-production "false"}
 
   :lein-release {:release-tasks [:clean :uberjar :pom :rpm]
                  :clojars-url "clojars@clojars.brislabs.com:"}
