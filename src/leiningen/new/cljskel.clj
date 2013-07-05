@@ -15,10 +15,10 @@
               :year (year)}]
     (->files data
              ["project.clj" (render "project.clj" data)]
-             ["all" (render "all" data)]
+             ["all" (render "all" data) :executable true]
              ["test_helper.sh" (render "test_helper.sh" data)]
-             ["acceptance" (render "acceptance" data)]
-             ["integration" (render "integration" data)]
+             ["acceptance" (render "acceptance" data) :executable true]
+             ["integration" (render "integration" data) :executable true]
              [".gitignore" (render ".gitignore" data)]
              ["src/{{sanitized}}/setup.clj" (render "setup.clj" data)]
              ["src/{{sanitized}}/web.clj" (render "web.clj" data)]
