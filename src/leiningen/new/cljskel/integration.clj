@@ -32,7 +32,7 @@
 (defmethod read-body :none [http-response]
   (throw (Exception. (str "No content-type in response: " http-response))))
 
-(fact-group :acceptance
+(fact-group :integration
    (fact "Ping resource returns 200 HTTP response"
          (let [response (client/get (url+ "/ping")  {:throw-exceptions false})]
            response => (contains {:status 200})))
