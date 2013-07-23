@@ -15,7 +15,7 @@
                  [com.yammer.metrics/metrics-logback "2.1.1"]
                  [com.ovi.common.metrics/metrics-graphite "2.1.12"]
                  [clj-http "0.5.3"]
-                 [cheshire "5.0.2"]
+                 [cheshire "5.2.0"]
                  [clj-time "0.4.4"]
                  [environ "0.4.0"]
                  [nokia/ring-utils "1.0.0"]
