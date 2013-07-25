@@ -38,7 +38,7 @@
   ;; development token values
   :env {:environment-name "Dev"
         :service-name "{{name}}"
-        :service-port "3000"
+        :service-port "8080"
         :service-url "http://localhost:%s/1.x"
         :restdriver-port "8081"
         :environment-entertainment-graphite-host "graphite.brislabs.com"
@@ -53,7 +53,7 @@
 
   :ring {:handler {{name}}.web/app
          :main {{name}}.setup
-         :port ~(Integer.  (get (System/getenv) "SERVICE_PORT" "3000"))
+         :port ~(Integer.  (get (System/getenv) "SERVICE_PORT" "8080"))
          :init {{name}}.setup/setup
          :browser-uri "/1.x/status"}
 

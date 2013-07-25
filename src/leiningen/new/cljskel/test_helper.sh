@@ -10,7 +10,7 @@ wait_for_port () {
 
     for i in `seq 1 $TIMEOUT`
     do
-        if [ `netstat -nl 2>/dev/null | grep \:${SERVICE_PORT:="3000"} | wc -l` -gt 0 ]
+        if [ `netstat -nl 2>/dev/null | grep \:${SERVICE_PORT:="8080"} | wc -l` -gt 0 ]
         then
             return 0
         fi
@@ -39,7 +39,7 @@ run_test () {
 
     lein trampoline run&
     server_pid=$!
-    port=${SERVICE_PORT:="3000"}
+    port=${SERVICE_PORT:="8080"}
 
     echo "PID: $server_pid"
     echo -e "**********\nGiving lein $timeout seconds to build and start the application...\n**********"
