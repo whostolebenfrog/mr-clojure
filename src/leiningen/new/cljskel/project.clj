@@ -1,37 +1,42 @@
 (defproject {{name}} "1.0.0-SNAPSHOT"
   :description "{{upper-name}} service"
   :url "http://wikis.in.nokia.com/NokiaMusicArchitecture/{{upper-name}}"
-  :dependencies [[org.clojure/clojure "1.4.0"]
-                 [compojure "1.1.3" :exclusions [javax.servlet/servlet-api]]
+
+  :dependencies [[compojure "1.1.5" :exclusions [javax.servlet/servlet-api]]
                  [ring-middleware-format "0.3.0"]
+                 [ring/ring-jetty-adapter "1.2.0"]
+                 [org.clojure/clojure "1.5.1"]
+                 [org.clojure/data.json "0.2.2"]
                  [org.clojure/data.xml "0.0.7"]
-                 [org.clojure/data.json "0.2.1"]
                  [org.clojure/data.zip "0.1.1"]
-                 [org.clojure/tools.logging "0.2.3"]
-                 [org.slf4j/slf4j-api "1.6.4"]
-                 [org.slf4j/jul-to-slf4j "1.6.0"]
-                 [ch.qos.logback/logback-classic "1.0.3"]
-                 [com.ovi.common.logging/logback-appender "0.0.32"]
-                 [com.yammer.metrics/metrics-logback "2.1.1"]
-                 [com.ovi.common.metrics/metrics-graphite "2.1.12"]
-                 [clj-http "0.5.3"]
+                 [org.clojure/tools.logging "0.2.6"]
+                 [org.slf4j/slf4j-api "1.7.5"]
+                 [org.slf4j/jul-to-slf4j "1.7.5"]
+                 [ch.qos.logback/logback-classic "1.0.13"]
+                 [com.ovi.common.logging/logback-appender "0.0.45"]
+                 [com.yammer.metrics/metrics-logback "2.2.0"]
+                 [com.ovi.common.metrics/metrics-graphite "2.1.21"]
+                 [clj-http "0.7.4"]
                  [cheshire "5.2.0"]
-                 [clj-time "0.4.4"]
+                 [clj-time "0.5.1"]
                  [environ "0.4.0"]
                  [nokia/ring-utils "1.0.0"]
                  [metrics-clojure "1.0.1"]
                  [metrics-clojure-ring "1.0.1"]]
 
-  :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.28"
-                                   :exclusions [org.slf4j/slf4j-nop javax.servlet/servlet-api]]
-                                  [junit "4.10"]
+  :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.32"
+                                   :exclusions [org.slf4j/slf4j-nop
+                                                javax.servlet/servlet-api
+                                                org.eclipse.jetty.orbit/javax.servlet]]
                                   [clj-http-fake "0.4.1"]
-                                  [rest-cljer "0.1.7"]
-                                  [midje "1.5.1"]]
+                                  [junit "4.11"]
+                                  [midje "1.5.1"]
+                                  [rest-cljer "0.1.7"]]
                    :plugins [[lein-rpm "0.0.4"]
                              [lein-midje "3.0.1"]
-                             [jonase/kibit "0.0.4"]]}}
-  :plugins [[lein-ring "0.8.5"]
+                             [jonase/kibit "0.0.8"]]}}
+
+  :plugins [[lein-ring "0.8.6"]
             [lein-environ "0.4.0"]
             [lein-release "1.0.73"]]
 

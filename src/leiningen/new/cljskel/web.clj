@@ -2,7 +2,7 @@
     (:require [compojure.core :refer [defroutes context GET PUT POST DELETE]]
               [compojure.route :as route]
               [compojure.handler :as handler]
-              [ring.middleware.format-response :refer [wrap-restful-response]]
+              [ring.middleware.format-response :refer [wrap-json-response]]
               [ring.middleware.params :refer [wrap-params]]
               [ring.middleware.keyword-params :refer [wrap-keyword-params]]
               [clojure.data.xml :refer [element emit-str]]
@@ -53,6 +53,6 @@
       (wrap-ignore-trailing-slash)
       (wrap-keyword-params)
       (wrap-params)
-      (wrap-restful-response)
+      (wrap-json-response)
       (wrap-per-resource-metrics [replace-guid replace-mongoid replace-number (replace-outside-app "/1.x")])
       (expose-metrics-as-json)))
