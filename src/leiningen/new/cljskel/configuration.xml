@@ -22,8 +22,8 @@
         <documentation>The overall logging level for the service. Defaults to warn.</documentation>
     </item>
 
-    <item name="service.logging.consolethreshold" defaultValue="warn" regex="(trace|debug|info|warn|error|all|off)">
-        <documentation>The threshold at which the logger will log to the console. Defaults to warn.</documentation>
+    <item name="service.logging.consolethreshold" defaultValue="off" regex="(trace|debug|info|warn|error|all|off)">
+        <documentation>The threshold at which the logger will log to the console.</documentation>
     </item>
 
     <item name="service.logging.filethreshold" defaultValue="info" regex="(trace|debug|info|warn|error|all|off)">
