@@ -3,10 +3,10 @@
   :url "http://wikis.in.nokia.com/NokiaMusicArchitecture/{{upper-name}}"
 
   :dependencies [[compojure "1.1.5" :exclusions [javax.servlet/servlet-api]]
-                 [ring-middleware-format "0.3.0"]
+                 [ring-middleware-format "0.3.1"]
                  [ring/ring-jetty-adapter "1.2.0"]
                  [org.clojure/clojure "1.5.1"]
-                 [org.clojure/data.json "0.2.2"]
+                 [org.clojure/data.json "0.2.3"]
                  [org.clojure/data.xml "0.0.7"]
                  [org.clojure/data.zip "0.1.1"]
                  [org.clojure/tools.logging "0.2.6"]
@@ -16,11 +16,11 @@
                  [com.ovi.common.logging/logback-appender "0.0.45"]
                  [com.yammer.metrics/metrics-logback "2.2.0"]
                  [com.ovi.common.metrics/metrics-graphite "2.1.21"]
-                 [clj-http "0.7.4"]
+                 [clj-http "0.7.6"]
                  [cheshire "5.2.0"]
-                 [clj-time "0.5.1"]
+                 [clj-time "0.6.0"]
                  [environ "0.4.0"]
-                 [nokia/ring-utils "1.0.0"]
+                 [nokia/ring-utils "1.0.1"]
                  [metrics-clojure "1.0.1"]
                  [metrics-clojure-ring "1.0.1"]]
 
