@@ -60,7 +60,8 @@
          :main {{name}}.setup
          :port ~(Integer.  (get (System/getenv) "SERVICE_PORT" "8080"))
          :init {{name}}.setup/setup
-         :browser-uri "/1.x/status"}
+         :browser-uri "/1.x/status"
+         :nrepl {:start? true}}
 
   :repositories {"internal-clojars"
                  "http://clojars.brislabs.com/repo"
