@@ -11,6 +11,7 @@
   [name]
   (let [data {:name name
               :upper-name (cap name)
+              :lower-name (.toLowerCase name)
               :sanitized (name-to-path name)
               :year (year)}]
     (->files data

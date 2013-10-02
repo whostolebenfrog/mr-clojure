@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PIDS=$(pgrep java -lf | grep {{upper-name}} | cut -d" " -f1);
+PIDS=$(pgrep java -lf | grep {{lower-name}} | cut -d" " -f1);
 
 if [ -n "$PIDS" ]
 then
@@ -9,12 +9,12 @@ then
 fi
 
 JETTY_HOME=/usr/local/jetty
-JAR_NAME=$JETTY_HOME/{{upper-name}}.jar
+JAR_NAME=$JETTY_HOME/{{lower-name}}.jar
 LOG_FILE=$JETTY_HOME/log/jetty.log
 ERR_FILE=$JETTY_HOME/log/jetty.err
 
 IFS="$(echo -e "\n\r")"
-for LINE in `cat /usr/local/deployment/{{upper-name}}1/config/post_install.properties`
+for LINE in `cat /etc/{{lower-name}}.properties`
 do
   case $LINE in
     \#*) ;;
