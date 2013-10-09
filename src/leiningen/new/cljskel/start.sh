@@ -32,7 +32,7 @@ SERVICE_PORT=${SERVICE_PORT:-"8080"}
 STATUS_PATH=${SERVICE_STATUS_PATH:-"/1.x/status"}
 SERVICE_JETTY_START_TIMEOUT_SECONDS=${SERVICE_JETTY_START_TIMEOUT_SECONDS:-"15"}
 
-nohup java -Dconfig=/usr/local/deployment/{{upper-name}}1/config/post_install.properties $SERVICE_JVMARGS -jar $JAR_NAME > $LOG_FILE 2> $ERR_FILE < /dev/null &
+nohup java $SERVICE_JVMARGS -Dservice.logging.path=${SERVICE_LOGGING_PATH} -jar $JAR_NAME > $LOG_FILE 2> $ERR_FILE < /dev/null &
 
 statusUrl=http://localhost:$SERVICE_PORT$STATUS_PATH
 waitTimeout=$SERVICE_JETTY_START_TIMEOUT_SECONDS
