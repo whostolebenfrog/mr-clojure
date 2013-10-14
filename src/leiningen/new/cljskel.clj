@@ -18,6 +18,7 @@
              ["project.clj" (render "project.clj" data)]
              ["all" (render "all" data) :executable true]
              ["test_helper.sh" (render "test_helper.sh" data)]
+ 	     ["release.sh" (render "release.sh" data) :executable true]
              ["acceptance" (render "acceptance" data) :executable true]
              ["integration" (render "integration" data) :executable true]
              [".gitignore" (render ".gitignore" data)]
