@@ -10,5 +10,4 @@ dc-sdk.log
 .lein-deps-sum
 .lein-plugins/
 .project
-bin/
 .lein-env
