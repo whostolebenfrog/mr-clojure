@@ -43,7 +43,7 @@
             [lein-release "1.0.73"]]
 
   ;; development token values
-  :env {:environment-name "Dev"
+  :env {:environment-name "poke"
         :service-name "{{name}}"
         :service-port "8080"
         :service-url "http://localhost:%s/1.x"
@@ -70,9 +70,9 @@
                  "rm.brislabs.com"
                  "http://rm.brislabs.com/nexus/content/groups/all-releases"}
 
-  :uberjar-name "{{upper-name}}.jar"
+  :uberjar-name "{{lower-name}}.jar"
 
-  :rpm {:name "{{upper-name}}1"
+  :rpm {:name "{{lower-name}}"
         :summary "RPM for {{upper-name}} service"
         :copyright "Nokia {{year}}"
         :preinstall {:scriptFile "scripts/rpm/preinstall.sh"}
@@ -80,23 +80,23 @@
         :preremove {:scriptFile "scripts/rpm/preremove.sh"}
         :postremove {:scriptFile "scripts/rpm/postremove.sh"}
         :requires ["jdk >= 2000:1.6.0_31-fcs"]
-        :mappings [{:directory "/usr/local/jetty"
+        :mappings [{:directory "/usr/local/{{lower-name}}"
                     :filemode "444"
-                    :username "jetty"
-                    :groupname "jetty"
-                    :sources {:source [{:location "target/{{upper-name}}.jar"}]}}
-                   {:directory "/usr/local/jetty/bin"
+                    :username "{{lower-name}}"
+                    :groupname "{{lower-name}}"
+                    :sources {:source [{:location "target/{{lower-name}}.jar"}]}}
+                   {:directory "/usr/local/{{lower-name}}/bin"
                     :filemode "744"
-                    :username "jetty"
-                    :groupname "jetty"
+                    :username "{{lower-name}}"
+                    :groupname "{{lower-name}}"
                     :sources {:source [{:location "scripts/bin"}]}}
-                   {:directory "/usr/local/deployment/{{upper-name}}1/bin"
+                   {:directory "/usr/local/deployment/{{lower-name}}/bin"
                     :filemode "744"
                     :sources {:source [{:location "scripts/dmt"}]}}
                    {:directory "/etc/rc.d/init.d"
                     :filemode "744"
-                    :username "jetty"
-                    :groupname "jetty"
-                    :sources {:source [{:location "scripts/service/jetty"}]}}]}
+                    :username "{{lower-name}}"
+                    :groupname "{{lower-name}}"
+                    :sources {:source [{:location "scripts/service/{{lower-name}}"}]}}]}
 
   :main {{name}}.setup)

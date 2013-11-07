@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PIDS=$(pgrep java -lf | grep {{upper-name}} | cut -d" " -f1);
+PIDS=$(pgrep java -lf | grep {{lower-name}} | cut -d" " -f1);
 
 if [ -n "$PIDS" ]
 then

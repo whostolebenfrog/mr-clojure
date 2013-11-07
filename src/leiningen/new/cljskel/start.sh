@@ -1,6 +1,8 @@
 #!/bin/sh
 
-PIDS=$(pgrep java -lf | grep {{lower-name}} | cut -d" " -f1);
+APP_NAME={{lower-name}}
+
+PIDS=$(pgrep java -lf | grep $APP_NAME | cut -d" " -f1);
 
 if [ -n "$PIDS" ]
 then
@@ -8,13 +10,13 @@ then
   exit 1
 fi
 
-JETTY_HOME=/usr/local/jetty
-JAR_NAME=$JETTY_HOME/{{lower-name}}.jar
+JETTY_HOME=/usr/local/$APP_NAME
+JAR_NAME=$JETTY_HOME/$APP_NAME.jar
 LOG_FILE=$JETTY_HOME/log/jetty.log
 ERR_FILE=$JETTY_HOME/log/jetty.err
 
 IFS="$(echo -e "\n\r")"
-for LINE in `cat /etc/{{lower-name}}.properties`
+for LINE in `cat /etc/${APP_NAME}.properties`
 do
   case $LINE in
     \#*) ;;
@@ -30,7 +32,8 @@ IFS="$(echo -e " ")"
 
 SERVICE_PORT=${SERVICE_PORT:-"8080"}
 STATUS_PATH=${SERVICE_STATUS_PATH:-"/1.x/status"}
-SERVICE_JETTY_START_TIMEOUT_SECONDS=${SERVICE_JETTY_START_TIMEOUT_SECONDS:-"15"}
+SERVICE_JETTY_START_TIMEOUT_SECONDS=${SERVICE_JETTY_START_TIMEOUT_SECONDS:-"60"}
+SERVICE_LOGGING_PATH=${SERVICE_LOGGING_PATH:-"/var/log"${APP_NAME}}
 
 nohup java $SERVICE_JVMARGS -Dservice.logging.path=${SERVICE_LOGGING_PATH} -jar $JAR_NAME > $LOG_FILE 2> $ERR_FILE < /dev/null &
 
@@ -38,18 +41,18 @@ statusUrl=http://localhost:$SERVICE_PORT$STATUS_PATH
 waitTimeout=$SERVICE_JETTY_START_TIMEOUT_SECONDS
 sleepCounter=0
 sleepIncrement=2
-  
+
 echo "Giving Jetty $waitTimeout seconds to start successfully"
 echo "Using $statusUrl to determine service status"
 
 retVal=0
 
-until [ `curl --write-out %{http_code} --silent --output /dev/null $statusUrl` -eq 200 ]  
+until [ `curl --write-out %{http_code} --silent --output /dev/null $statusUrl` -eq 200 ]
 do
   if [ $sleepCounter -ge $waitTimeout ]
   then
     echo "Jetty didn't start within $waitTimeout seconds."
-    PIDS=$(pgrep java -lf | grep {{upper-name}} | cut -d" " -f1);
+    PIDS=$(pgrep java -lf | grep $APP_NAME | cut -d" " -f1);
     if [ -n "$PIDS" ]
 	then
 	  echo "Killing $PIDS";

@@ -41,4 +41,4 @@
              ["scripts/rpm/postremove.sh" (render "postremove.sh" data)]
              ["scripts/rpm/preinstall.sh" (render "preinstall.sh" data)]
              ["scripts/rpm/preremove.sh" (render "preremove.sh" data)]
-             ["scripts/service/jetty" (render "jetty" data)])))
+             ["scripts/service/{{lower-name}}" (render "jetty" data)])))
