@@ -13,6 +13,7 @@
     <file>${SERVICE_LOGGING_PATH:-/tmp}/{{name}}.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${SERVICE_LOGGING_PATH:-/tmp}/{{name}}.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <maxHistory>28</maxHistory>
     </rollingPolicy>
     <encoder>
       <pattern>%d{dd/MM/yyyy HH:mm:ss.SSS} [%thread] %-5level %X{logItemId} %logger{36} - %msg%n %X{stack}</pattern>
