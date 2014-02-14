@@ -20,28 +20,23 @@
 (defn set-version! [version]
   (alter-var-root #'*version* (fn [_] version)))
 
-(defn response [data content-type & [status]]
-  {:status (or status 200)
-   :headers {"Content-Type" content-type}
-   :body data})
-
-(defn status
+(defn healthcheck
   []
-  {:headers {"Content-Type" "application/xml"}
-   :body    (emit-str (element :status
-                               {:serviceName "{{name}}"
-                                :version *version*
-                                :success true}))})
+  (let [body {:name "{{name}}"
+              :version *version*
+              :success true
+              :dependencies []}]
+    {:headers {"content-type" "application/json"}
+     :status (if (:success body) 200 500)
+     :body body}))
 
 (defroutes routes
-  (context
-   "/1.x" []
 
-   (GET "/ping"
-        [] "pong")
+  (GET "/healthcheck"
+       [] (healthcheck))
 
-   (GET "/status"
-        [] (status)))
+  (GET "/ping"
+       [] "pong")
 
   (route/not-found (error-response "Resource not found" 404)))
 

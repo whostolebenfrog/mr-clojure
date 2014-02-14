@@ -51,7 +51,7 @@
   :env {:environment-name "poke"
         :service-name "{{name}}"
         :service-port "8080"
-        :service-url "http://localhost:%s/1.x"
+        :service-url "http://localhost:%s"
         :restdriver-port "8081"
         :environment-entertainment-graphite-host "graphite.brislabs.com"
         :environment-entertainment-graphite-port "8080"
@@ -67,7 +67,7 @@
          :main {{name}}.setup
          :port ~(Integer.  (get (System/getenv) "SERVICE_PORT" "8080"))
          :init {{name}}.setup/setup
-         :browser-uri "/1.x/status"
+         :browser-uri "/healthcheck"
          :nrepl {:start? true}}
 
   :repositories {"internal-clojars"

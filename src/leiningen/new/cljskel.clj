@@ -27,6 +27,7 @@
              ["resources/logback.xml" (render "logback.xml" data)]
 
              ["test/{{sanitized}}/unit/web.clj" (render "web_unit.clj" data)]
+             ["test/{{sanitized}}/test_common.clj" (render "test_common.clj" data)]
              ["test/{{sanitized}}/acceptance.clj" (render "acceptance.clj" data)]
              ["test/{{sanitized}}/integration.clj" (render "integration.clj" data)]
              [".midje.clj" (render ".midje.clj" data)]

@@ -7,7 +7,8 @@
   (routes {:request-method method
            :uri resource } ))
 
-(fact-group :unit
+(fact-group
+ :unit
+
   (fact "Ping returns a pong"
-        (:body (request :get "/1.x/ping"))  => "pong" )
-)
+        (:body (request :get "/ping"))  => "pong" ))
