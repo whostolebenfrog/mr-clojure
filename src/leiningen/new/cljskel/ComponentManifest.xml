@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<p:manifest xmlns:p="com:ovi:music:tools:manifest"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="com:ovi:music:tools:manifest ComponentManifest.xsd ">
-    
-    <p:file location="logback.xml" />
-    
-</p:manifest>
