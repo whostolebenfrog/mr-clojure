@@ -13,7 +13,7 @@
                  [environ "0.4.0"]
                  [metrics-clojure "1.0.1"]
                  [metrics-clojure-ring "1.0.1"]
-                 [nokia/instrumented-ring-jetty-adapter "0.1.7"]
+                 [nokia/instrumented-ring-jetty-adapter "0.1.8"]
                  [nokia/ring-utils "1.2.1"]
                  [org.clojure/clojure "1.5.1"]
                  [org.clojure/data.json "0.2.4"]
