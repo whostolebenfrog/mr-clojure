@@ -95,9 +95,6 @@
                     :username "{{lower-name}}"
                     :groupname "{{lower-name}}"
                     :sources {:source [{:location "scripts/bin"}]}}
-                   {:directory "/usr/local/deployment/{{lower-name}}/bin"
-                    :filemode "744"
-                    :sources {:source [{:location "scripts/dmt"}]}}
                    {:directory "/etc/rc.d/init.d"
                     :filemode "744"
                     :username "{{lower-name}}"

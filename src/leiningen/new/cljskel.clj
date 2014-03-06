@@ -34,7 +34,6 @@
 
              ["scripts/bin/start.sh" (render "start.sh" data)]
              ["scripts/bin/stop.sh" (render "stop.sh" data)]
-             ["scripts/dmt/post_install" (render "post_install" data)]
              ["scripts/rpm/postinstall.sh" (render "postinstall.sh" data)]
              ["scripts/rpm/postremove.sh" (render "postremove.sh" data)]
              ["scripts/rpm/preinstall.sh" (render "preinstall.sh" data)]
