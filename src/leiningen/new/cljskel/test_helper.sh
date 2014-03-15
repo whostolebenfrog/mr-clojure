@@ -10,7 +10,7 @@ wait_for_port () {
 
     for i in `seq 1 $TIMEOUT`
     do
-        if [ `lsof -nt -i4TCP:${SERVICE_PORT:="8080"} | wc -l` -gt 0 ]
+        if [ `lsof -nt -iTCP:${SERVICE_PORT:="8080"} | wc -l` -gt 0 ]
         then
             return 0
         fi
