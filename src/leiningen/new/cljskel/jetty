@@ -15,6 +15,8 @@
 # description: Runs {{upper-name}}
 # processname: {{lower-name}}
 
+LOCKFILE=/var/lock/subsys/{{lower-name}}
+
 #define where jetty is
 GIVEN_HOME="/usr/local/{{lower-name}}"
 
@@ -58,6 +60,7 @@ start)
     else
         $SUBIT "$JETTY_CMD_START"
     fi
+    touch $LOCKFILE
     ;;
 stop)
     echo Stopping Jetty
@@ -66,6 +69,7 @@ stop)
     else
         $SUBIT "$JETTY_CMD_STOP"
     fi
+    rm -f $LOCKFILE
     ;;
 restart)
     $0 stop
