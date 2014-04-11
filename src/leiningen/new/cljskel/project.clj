@@ -2,7 +2,7 @@
   :description "{{upper-name}} service"
   :url "http://wikis.in.nokia.com/NokiaMusicArchitecture/{{upper-name}}"
 
-  :dependencies [[ch.qos.logback/logback-classic "1.1.1"]
+  :dependencies [[ch.qos.logback/logback-classic "1.1.2"]
                  [cheshire "5.3.1"]
                  [clj-http "0.7.9"]
                  [clj-time "0.6.0"]
@@ -21,12 +21,12 @@
                  [org.clojure/data.zip "0.1.1"]
                  [org.clojure/tools.logging "0.2.6"]
                  [org.eclipse.jetty/jetty-server "8.1.14.v20131031"]
-                 [org.slf4j/slf4j-api "1.7.6"]
+                 [org.slf4j/slf4j-api "1.7.7"]
                  [org.slf4j/jcl-over-slf4j "1.7.6"]
                  [org.slf4j/jul-to-slf4j "1.7.6"]
                  [org.slf4j/log4j-over-slf4j "1.7.6"]
                  [ring-middleware-format "0.3.2"]
-                 [ring/ring-jetty-adapter "1.2.1" :exclusions [org.eclipse.jetty/jetty-server]]]
+                 [ring/ring-jetty-adapter "1.2.2" :exclusions [org.eclipse.jetty/jetty-server]]]
 
  :exclusions [commons-logging
               log4j]
@@ -37,7 +37,7 @@
                                                 org.eclipse.jetty.orbit/javax.servlet]]
                                   [clj-http-fake "0.4.1"]
                                   [junit "4.11"]
-                                  [midje "1.6.0"]
+                                  [midje "1.6.3"]
                                   [rest-cljer "0.1.11"]]
                    :plugins [[lein-rpm "0.0.5"]
                              [lein-midje "3.1.3"]
