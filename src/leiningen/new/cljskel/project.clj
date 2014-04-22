@@ -5,12 +5,12 @@
   :dependencies [[ch.qos.logback/logback-classic "1.1.2"]
                  [cheshire "5.3.1"]
                  [clj-http "0.7.9"]
-                 [clj-time "0.6.0"]
+                 [clj-time "0.7.0"]
                  [com.ovi.common.logging/logback-appender "0.0.45"]
                  [com.ovi.common.metrics/metrics-graphite "2.1.23"]
                  [com.yammer.metrics/metrics-logback "2.2.0"]
                  [compojure "1.1.6" :exclusions [javax.servlet/servlet-api]]
-                 [environ "0.4.0"]
+                 [environ "0.5.0"]
                  [metrics-clojure "1.0.1"]
                  [metrics-clojure-ring "1.0.1"]
                  [nokia/instrumented-ring-jetty-adapter "0.1.8"]
@@ -20,22 +20,21 @@
                  [org.clojure/data.xml "0.0.7"]
                  [org.clojure/data.zip "0.1.1"]
                  [org.clojure/tools.logging "0.2.6"]
-                 [org.eclipse.jetty/jetty-server "8.1.14.v20131031"]
+                 [org.eclipse.jetty/jetty-server "8.1.15.v20140411"]
                  [org.slf4j/slf4j-api "1.7.7"]
-                 [org.slf4j/jcl-over-slf4j "1.7.6"]
-                 [org.slf4j/jul-to-slf4j "1.7.6"]
-                 [org.slf4j/log4j-over-slf4j "1.7.6"]
+                 [org.slf4j/jcl-over-slf4j "1.7.7"]
+                 [org.slf4j/jul-to-slf4j "1.7.7"]
+                 [org.slf4j/log4j-over-slf4j "1.7.7"]
                  [ring-middleware-format "0.3.2"]
                  [ring/ring-jetty-adapter "1.2.2" :exclusions [org.eclipse.jetty/jetty-server]]]
 
  :exclusions [commons-logging
               log4j]
 
-  :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.36"
+  :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.38"
                                    :exclusions [org.slf4j/slf4j-nop
                                                 javax.servlet/servlet-api
                                                 org.eclipse.jetty.orbit/javax.servlet]]
-                                  [clj-http-fake "0.4.1"]
                                   [junit "4.11"]
                                   [midje "1.6.3"]
                                   [rest-cljer "0.1.11"]]
@@ -43,8 +42,8 @@
                              [lein-midje "3.1.3"]
                              [jonase/kibit "0.0.8"]]}}
 
-  :plugins [[lein-ring "0.8.8"]
-            [lein-environ "0.4.0"]
+  :plugins [[lein-ring "0.8.10"]
+            [lein-environ "0.5.0"]
             [lein-release "1.0.73"]]
 
   ;; development token values
