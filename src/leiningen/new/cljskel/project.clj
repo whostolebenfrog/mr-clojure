@@ -31,7 +31,7 @@
  :exclusions [commons-logging
               log4j]
 
-  :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.38"
+  :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.36"
                                    :exclusions [org.slf4j/slf4j-nop
                                                 javax.servlet/servlet-api
                                                 org.eclipse.jetty.orbit/javax.servlet]]
