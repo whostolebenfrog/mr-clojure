@@ -6,7 +6,7 @@ PIDS=$(pgrep java -lf | grep $APP_NAME | cut -d" " -f1);
 
 if [ -n "$PIDS" ]
 then
-  echo "Jetty is already running in process $PIDS";
+  echo "{{upper-name}} is already running in process $PIDS";
   exit 1
 fi
 
@@ -31,9 +31,9 @@ IFS="$(echo -e " ")"
 SERVICE_PORT=${SERVICE_PORT:-"8080"}
 HEALTHCHECK_PATH=${SERVICE_HEALTHCHECK_PATH:-"/healthcheck"}
 SERVICE_JETTY_START_TIMEOUT_SECONDS=${SERVICE_JETTY_START_TIMEOUT_SECONDS:-"60"}
-SERVICE_LOGGING_PATH=${SERVICE_LOGGING_PATH:-"/var/log/"${APP_NAME}}
-LOG_FILE=${SERVICE_LOGGING_PATH}/jetty.log
-ERR_FILE=${SERVICE_LOGGING_PATH}/jetty.err
+SERVICE_LOGGING_PATH=${SERVICE_LOGGING_PATH:-"/var/log/${APP_NAME}"}
+LOG_FILE=${SERVICE_LOGGING_PATH}/{{lower-name}}.out
+ERR_FILE=${SERVICE_LOGGING_PATH}/{{lower-name}}.err
 
 mkdir -p /var/encrypted/logs/${APP_NAME}
 
@@ -44,7 +44,7 @@ waitTimeout=$SERVICE_JETTY_START_TIMEOUT_SECONDS
 sleepCounter=0
 sleepIncrement=2
 
-echo "Giving Jetty $waitTimeout seconds to start successfully"
+echo "Giving {{upper-name}} $waitTimeout seconds to start successfully"
 echo "Using $statusUrl to determine service status"
 
 retVal=0
@@ -53,7 +53,7 @@ until [ `curl --write-out %{http_code} --silent --output /dev/null $statusUrl` -
 do
   if [ $sleepCounter -ge $waitTimeout ]
   then
-    echo "Jetty didn't start within $waitTimeout seconds."
+    echo "{{upper-name}} didn't start within $waitTimeout seconds."
     PIDS=$(pgrep java -lf | grep $APP_NAME | cut -d" " -f1);
     if [ -n "$PIDS" ]
 	then
@@ -80,9 +80,9 @@ cat $ERR_FILE 1>&2
 
 if [ $retVal -eq 1 ]
 then
-  echo "Starting Jetty failed"
+  echo "Starting {{upper-name}} failed"
 else
-  echo "Starting Jetty succeeded"
+  echo "Starting {{upper-name}} succeeded"
 fi
 
 exit $retVal

@@ -1,12 +1,12 @@
 #!/bin/sh
 #
-# Jetty Control Script
+# {{upper-name}} Control Script
 #
 # To use this script run it as root - it will switch to the specified user
 #
 # Here is a little (and extremely primitive) startup/shutdown script
-# for RedHat systems. It assumes that Jetty lives in /usr/local/jetty,
-# it's run by user 'jetty' and JDK binaries are in /usr/java/default/bin.
+# for RedHat systems. It assumes that {{upper-name}} lives in /usr/local/{{lower-name}},
+# it's run by user '{{lower-name}}' and JDK binaries are in /usr/java/default/bin.
 # All this can be changed in the script itself.
 #
 # Either modify this script for your requirements or just ensure that
@@ -17,18 +17,18 @@
 
 LOCKFILE=/var/lock/subsys/{{lower-name}}
 
-#define where jetty is
+#define where {{lower-name}} is
 GIVEN_HOME="/usr/local/{{lower-name}}"
 
 JETTY_HOME=${JETTY_HOME:-"$GIVEN_HOME"}
 
-#define the user under which jetty will run, or use 'RUNASIS' to run as the current user
+#define the user under which {{lower-name}} will run, or use 'RUNASIS' to run as the current user
 JETTY_USER=${JETTY_USER:-"{{lower-name}}"}
 
 #make sure java is in your path
 JAVAPTH=${JAVAPTH:-"/usr/java/default/bin"}
 
-#define the script to use to start jetty
+#define the script to use to start {{lower-name}}
 JETTYSH=${JETTYSH:-"$JETTY_HOME/bin/start.sh"}
 
 if [ "$JETTY_USER" = "RUNASIS" ]; then
@@ -53,7 +53,7 @@ fi
 
 case "$1" in
 start)
-    echo Starting Jetty with JETTY_CMD_START=$JETTY_CMD_START
+    echo Starting {{upper-name}} with JETTY_CMD_START=$JETTY_CMD_START
     cd $JETTY_HOME
     if [ -z "$SUBIT" ]; then
         eval $JETTY_CMD_START
@@ -63,7 +63,7 @@ start)
     touch $LOCKFILE
     ;;
 stop)
-    echo Stopping Jetty
+    echo Stopping {{upper-name}}
     if [ -z "$SUBIT" ]; then
         $JETTY_CMD_STOP
     else

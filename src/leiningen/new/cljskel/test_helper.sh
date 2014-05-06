@@ -52,7 +52,7 @@ run_test () {
         exit $at_res
     else
         kill_server
-        echo "Jetty failed to start, it was not reachable on port $port within $timeout seconds"
+        echo "{{upper-name}} failed to start, it was not reachable on port $port within $timeout seconds"
         exit 1
     fi
 }
