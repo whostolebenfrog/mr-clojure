@@ -1,6 +1,6 @@
 # cljskel
 
-A Leiningen template that creates a new Clojure web app implementing /1.x/ping and /1.x/status.
+A Leiningen template that creates a new Clojure web app implementing /ping and /healthcheck.
 
 ## Usage
 
