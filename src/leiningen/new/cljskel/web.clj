@@ -1,14 +1,9 @@
 (ns {{name}}.web
     (:require [compojure.core :refer [defroutes context GET PUT POST DELETE]]
               [compojure.route :as route]
-              [compojure.handler :as handler]
               [ring.middleware.format-response :refer [wrap-json-response]]
               [ring.middleware.params :refer [wrap-params]]
               [ring.middleware.keyword-params :refer [wrap-keyword-params]]
-              [clojure.data.xml :refer [element emit-str]]
-              [clojure.string :refer [split]]
-              [clojure.tools.logging :refer [info warn error]]
-              [environ.core :refer [env]]
               [nokia.ring-utils.error :refer [wrap-error-handling error-response]]
               [nokia.ring-utils.metrics :refer [wrap-per-resource-metrics replace-outside-app
                                                 replace-guid replace-mongoid replace-number]]
