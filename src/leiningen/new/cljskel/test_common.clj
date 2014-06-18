@@ -11,5 +11,5 @@
 
    Fails pre-condition if content type is not application/json."
   [resp]
-  {:pre [(re-matches #"application/json.+" (get-in resp [:headers "content-type"]))]}
+  {:pre [(re-matches #"application/(.+)?json.+" (get-in resp [:headers "content-type"]))]}
   (json/parse-string (:body resp) true))
