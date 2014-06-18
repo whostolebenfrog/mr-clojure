@@ -13,7 +13,7 @@
 
  (fact "Healthcheck resource returns 200 HTTP response"
        (let [response (http/get (url+ "/healthcheck") {:throw-exceptions false})
-             body (read-body response)]
+             body (json-body response)]
          response => (contains {:status 200})
          body => (contains {:name "{{name}}"
                             :success true
