@@ -1,13 +1,17 @@
 (ns {{name}}.web
-    (:require [compojure.core :refer [defroutes context GET PUT POST DELETE]]
-              [compojure.route :as route]
-              [metrics.ring.expose :refer [expose-metrics-as-json]]
-              [metrics.ring.instrument :refer [instrument]]
-              [nokia.ring-utils.error :refer [wrap-error-handling error-response]]
-              [nokia.ring-utils.ignore-trailing-slash :refer [wrap-ignore-trailing-slash]]
-              [ring.middleware.format-response :refer [wrap-json-response]]
-              [ring.middleware.keyword-params :refer [wrap-keyword-params]]
-              [ring.middleware.params :refer [wrap-params]]))
+  (:require [compojure
+             [core :refer [defroutes context GET PUT POST DELETE]]
+             [route :as route]]
+            [metrics.ring
+             [expose :refer [expose-metrics-as-json]]
+             [instrument :refer [instrument]]]
+            [nokia.ring-utils
+             [error :refer [wrap-error-handling error-response]]
+             [ignore-trailing-slash :refer [wrap-ignore-trailing-slash]]]
+            [ring.middleware
+             [format-params :refer [wrap-json-kw-params]]
+             [format-response :refer [wrap-json-response]]
+             [params :refer [wrap-params]]]))
 
 (def ^:dynamic *version* "none")
 (defn set-version! [version]
@@ -38,7 +42,7 @@
       (instrument)
       (wrap-error-handling)
       (wrap-ignore-trailing-slash)
-      (wrap-keyword-params)
-      (wrap-params)
       (wrap-json-response)
+      (wrap-json-kw-params)
+      (wrap-params)
       (expose-metrics-as-json)))
