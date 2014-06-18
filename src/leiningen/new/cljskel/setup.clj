@@ -1,15 +1,15 @@
 (ns {{name}}.setup
-    (:require [{{name}}.web :as web]
-              [environ.core :refer [env]]
-              [clojure.java.io :as io]
-              [nokia.adapter.instrumented-jetty :as instrumented])
-    (:import (java.lang Integer)
-             (java.util.logging LogManager)
-             (com.ovi.common.metrics.graphite GraphiteReporterFactory GraphiteName ReporterState)
-             (com.ovi.common.metrics HostnameFactory)
-             (org.slf4j.bridge SLF4JBridgeHandler)
-             (java.util.concurrent TimeUnit))
-    (:gen-class))
+  (:require [{{name}}.web :as web]
+            [environ.core :refer [env]]
+            [clojure.java.io :as io]
+            [nokia.adapter.instrumented-jetty :as instrumented])
+  (:import (java.lang Integer)
+           (java.util.logging LogManager)
+           (com.ovi.common.metrics.graphite GraphiteReporterFactory GraphiteName ReporterState)
+           (com.ovi.common.metrics HostnameFactory)
+           (org.slf4j.bridge SLF4JBridgeHandler)
+           (java.util.concurrent TimeUnit))
+  (:gen-class))
 
 (defn read-file-to-properties [file-name]
   (with-open [^java.io.Reader reader (io/reader file-name)]
