@@ -16,9 +16,6 @@
                  [nokia/instrumented-ring-jetty-adapter "0.1.8"]
                  [nokia/ring-utils "1.2.4"]
                  [org.clojure/clojure "1.5.1"]
-                 [org.clojure/data.json "0.2.5"]
-                 [org.clojure/data.xml "0.0.7"]
-                 [org.clojure/data.zip "0.1.1"]
                  [org.clojure/tools.logging "0.2.6"]
                  [org.eclipse.jetty/jetty-server "8.1.15.v20140411"]
                  [org.slf4j/slf4j-api "1.7.7"]
@@ -28,8 +25,8 @@
                  [ring-middleware-format "0.3.2"]
                  [ring/ring-jetty-adapter "1.2.2" :exclusions [org.eclipse.jetty/jetty-server]]]
 
- :exclusions [commons-logging
-              log4j]
+  :exclusions [commons-logging
+               log4j]
 
   :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.36"
                                    :exclusions [org.slf4j/slf4j-nop
