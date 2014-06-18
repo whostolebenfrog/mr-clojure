@@ -1,13 +1,13 @@
 (ns {{name}}.web
     (:require [compojure.core :refer [defroutes context GET PUT POST DELETE]]
               [compojure.route :as route]
-              [ring.middleware.format-response :refer [wrap-json-response]]
-              [ring.middleware.params :refer [wrap-params]]
-              [ring.middleware.keyword-params :refer [wrap-keyword-params]]
+              [metrics.ring.expose :refer [expose-metrics-as-json]]
+              [metrics.ring.instrument :refer [instrument]]
               [nokia.ring-utils.error :refer [wrap-error-handling error-response]]
               [nokia.ring-utils.ignore-trailing-slash :refer [wrap-ignore-trailing-slash]]
-              [metrics.ring.expose :refer [expose-metrics-as-json]]
-              [metrics.ring.instrument :refer [instrument]]))
+              [ring.middleware.format-response :refer [wrap-json-response]]
+              [ring.middleware.keyword-params :refer [wrap-keyword-params]]
+              [ring.middleware.params :refer [wrap-params]]))
 
 (def ^:dynamic *version* "none")
 (defn set-version! [version]
@@ -32,7 +32,6 @@
        [] "pong")
 
   (route/not-found (error-response "Resource not found" 404)))
-
 
 (def app
   (-> routes

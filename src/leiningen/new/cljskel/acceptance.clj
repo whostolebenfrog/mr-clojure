@@ -1,9 +1,8 @@
 (ns {{name}}.acceptance
-  (:require [{{name}}.test-common :refer :all])
-  (:require [clj-http.client :as http]
-            [midje.sweet :refer :all]
-            [environ.core :refer [env]])
-  (:import [java.util UUID]))
+    (:require [{{name}}.test-common :refer :all]
+              [clj-http.client :as http]
+              [environ.core :refer [env]]
+              [midje.sweet :refer :all]))
 
 (fact-group
  :acceptance

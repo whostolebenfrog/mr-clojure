@@ -1,14 +1,10 @@
 (ns {{name}}.setup
     (:require [{{name}}.web :as web]
               [environ.core :refer [env]]
-              [clojure.string :as cs :only (split)]
-              [clojure.tools.logging :refer (info warn error)]
               [clojure.java.io :as io]
               [nokia.adapter.instrumented-jetty :as instrumented])
-    (:import (java.lang Integer Throwable)
+    (:import (java.lang Integer)
              (java.util.logging LogManager)
-             (com.yammer.metrics Metrics)
-             (com.yammer.metrics.core MetricName)
              (com.ovi.common.metrics.graphite GraphiteReporterFactory GraphiteName ReporterState)
              (com.ovi.common.metrics HostnameFactory)
              (org.slf4j.bridge SLF4JBridgeHandler)
@@ -23,7 +19,6 @@
 
 (defn configure-logging []
   (.reset (LogManager/getLogManager))
-  ;Route all java.util.logging log statements to slf4j
   (SLF4JBridgeHandler/install))
 
 (defn start-graphite-reporting []
@@ -41,7 +36,8 @@
      (ReporterState/valueOf (env :service-graphite-enabled)))))
 
 (def version
-  (delay (if-let [path (.getResource (ClassLoader/getSystemClassLoader) "META-INF/maven/{{name}}/{{name}}/pom.properties")]
+  (delay (if-let [path (.getResource (ClassLoader/getSystemClassLoader)
+                                     "META-INF/maven/{{name}}/{{name}}/pom.properties")]
            ((read-file-to-properties path) "version")
            "localhost")))
 
@@ -60,11 +56,8 @@
                                      :auto-reload? (not (Boolean/valueOf (env :service-production)))}))
 
 (defn start []
-  (do
-    (setup)
-    (reset! server (start-server))))
-
-(defn stop [] (if-let [server @server] (.stop server)))
+  (setup)
+  (reset! server (start-server)))
 
 (defn -main [& args]
   (start))

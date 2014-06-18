@@ -1,9 +1,9 @@
 (ns {{name}}.test-common
-  (:require [cheshire.core :as json]
-            [clojure.string :as str]
-            [clojure.xml :as xml]
-            [clojure.zip :as zip]
-            [environ.core :refer [env]]))
+    (:require [cheshire.core :as json]
+              [clojure.string :as str]
+              [clojure.xml :as xml]
+              [clojure.zip :as zip]
+              [environ.core :refer [env]]))
 
 (defn url+ [& suffix]
   (apply str (format (env :service-url) (env :service-port)) suffix))
