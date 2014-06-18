@@ -1,14 +1,14 @@
 (ns {{name}}.unit.web
-    (:require [{{name}}.web]
+    (:require [{{name}}.web :refer :all]
               [cheshire.core :as json]
-              [midje.sweet]))
+              [midje.sweet :refer :all]))
 
-(defn app [method resource]
-  (routes {:request-method method
-           :uri resource } ))
+(defn request [method resource]
+  (app {:request-method method
+        :uri resource}))
 
 (fact-group
  :unit
 
  (fact "Ping returns a pong"
-       (:body (request :get "/ping"))  => "pong" ))
+       (:body (request :get "/ping"))  => "pong"))
