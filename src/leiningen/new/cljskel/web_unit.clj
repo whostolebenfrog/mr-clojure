@@ -13,8 +13,8 @@
   "Creates a compojure request map and applies it to our routes.
    Accepets method, resource and optionally an extended map"
   [method resource & [{:keys [params body content-type headers]
-                       :or {:params {}
-                            :headers {}}}]]
+                       :or {params {}
+                            headers {}}}]]
   (let [{:keys [body] :as res}
         (app (merge {:request-method method
                      :uri resource
