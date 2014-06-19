@@ -48,12 +48,18 @@
 
 (def server (atom nil))
 
+(defn configure-server [server]
+  (doto server
+    (.setStopAtShutdown true)
+    (.setGracefulShutdown (Integer/valueOf (env :service-jetty-gracefulshutdown-millis 5000)))))
+
 (defn start-server []
   (instrumented/run-jetty #'web/app {:port (Integer. (env :service-port))
                                      :max-threads (Integer. (env :service-jetty-threads "254"))
                                      :join? false
                                      :stacktraces? (not (Boolean/valueOf (env :service-production)))
-                                     :auto-reload? (not (Boolean/valueOf (env :service-production)))}))
+                                     :auto-reload? (not (Boolean/valueOf (env :service-production)))
+                                     :configurator configure-server}))
 
 (defn start []
   (setup)
