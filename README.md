@@ -5,7 +5,7 @@ A Leiningen template that creates a new Clojure web app implementing /ping and /
 ## Usage
 
 ```
-git clone ssh://snc@source.nokia.com/Entertainment-Tooling/git/cljskel
+git clone git@github.brislabs.com:platform/cljskel.git
 cd  cljskel
 lein install
 cd ..
