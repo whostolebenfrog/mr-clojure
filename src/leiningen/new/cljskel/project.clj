@@ -81,7 +81,7 @@
         :postinstall {:scriptFile "scripts/rpm/postinstall.sh"}
         :preremove {:scriptFile "scripts/rpm/preremove.sh"}
         :postremove {:scriptFile "scripts/rpm/postremove.sh"}
-        :requires ["jdk >= 2000:1.7.0_25-fcs"]
+        :requires ["jdk >= 2000:1.7.0_55-fcs"]
         :mappings [{:directory "/usr/local/{{lower-name}}"
                     :filemode "444"
                     :username "{{lower-name}}"
