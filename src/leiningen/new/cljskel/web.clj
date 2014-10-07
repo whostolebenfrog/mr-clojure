@@ -5,22 +5,22 @@
             [metrics.ring
              [expose :refer [expose-metrics-as-json]]
              [instrument :refer [instrument]]]
-            [nokia.ring-utils
+            [radix
              [error :refer [wrap-error-handling error-response]]
-             [ignore-trailing-slash :refer [wrap-ignore-trailing-slash]]]
+             [ignore-trailing-slash :refer [wrap-ignore-trailing-slash]]
+             [setup :as setup]]
             [ring.middleware
              [format-params :refer [wrap-json-kw-params]]
              [format-response :refer [wrap-json-response]]
              [params :refer [wrap-params]]]))
 
-(def ^:dynamic *version* "none")
-(defn set-version! [version]
-  (alter-var-root #'*version* (fn [_] version)))
+(def version
+  (setup/version "{{name}}"))
 
 (defn healthcheck
   []
   (let [body {:name "{{name}}"
-              :version *version*
+              :version version
               :success true
               :dependencies []}]
     {:headers {"content-type" "application/json"}

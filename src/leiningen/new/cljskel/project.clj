@@ -4,29 +4,20 @@
 
   :dependencies [[ch.qos.logback/logback-classic "1.1.2"]
                  [cheshire "5.3.1"]
-                 [clj-http "0.7.8"]
-                 [clj-time "0.7.0"]
-                 [com.ovi.common.logging/logback-appender "0.0.45"]
-                 [com.ovi.common.metrics/metrics-graphite "2.1.25"]
-                 [com.yammer.metrics/metrics-logback "2.2.0"]
-                 [compojure "1.1.8" :exclusions [javax.servlet/servlet-api]]
-                 [environ "0.5.0"]
-                 [metrics-clojure "1.0.1"]
-                 [metrics-clojure-ring "1.0.1"]
-                 [nokia/instrumented-ring-jetty-adapter "0.1.8"]
-                 [nokia/ring-utils "1.2.4"]
-                 [org.clojure/clojure "1.5.1"]
-                 [org.clojure/tools.logging "0.2.6"]
-                 [org.eclipse.jetty/jetty-server "8.1.15.v20140411"]
-                 [org.slf4j/slf4j-api "1.7.7"]
-                 [org.slf4j/jcl-over-slf4j "1.7.7"]
-                 [org.slf4j/jul-to-slf4j "1.7.7"]
-                 [org.slf4j/log4j-over-slf4j "1.7.7"]
-                 [ring-middleware-format "0.3.2"]
-                 [ring/ring-jetty-adapter "1.2.2" :exclusions [org.eclipse.jetty/jetty-server]]]
+                 [clj-http "0.7.9"]
+                 [clj-time "0.8.0"]
+                 [com.ovi.common.logging/logback-appender "0.0.47"]
+                 [compojure "1.2.0"]
+                 [environ "1.0.0"]
+                 [mixradio/instrumented-ring-jetty-adapter "1.0.0"]
+                 [mixradio/radix "1.0.2"]
+                 [org.clojure/clojure "1.6.0"]
+                 [org.clojure/tools.logging "0.3.1"]
+                 [ring-middleware-format "0.4.0"]]
 
   :exclusions [commons-logging
-               log4j]
+               log4j
+               org.clojure/clojure]
 
   :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.36"
                                    :exclusions [org.slf4j/slf4j-nop
