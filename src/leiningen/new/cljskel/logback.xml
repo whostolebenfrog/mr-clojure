@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
+  <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+    <resetJUL>true</resetJUL>
+  </contextListener>
+
   <!-- Suppress messages that may cause deadlock -->
   <logger name="org.eclipse.jetty.webapp.WebAppClassLoader" level="off" />
 
@@ -49,4 +53,5 @@
     <appender-ref ref="console" />
     <appender-ref ref="service" />
   </root>
+
 </configuration>
