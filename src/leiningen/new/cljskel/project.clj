@@ -76,9 +76,8 @@
                     :groupname "{{lower-name}}"
                     :sources {:source [{:location "scripts/bin"}]}}
                    {:directory "/etc/rc.d/init.d"
-                    :filemode "744"
-                    :username "{{lower-name}}"
-                    :groupname "{{lower-name}}"
-                    :sources {:source [{:location "scripts/service/{{lower-name}}"}]}}]}
+                    :filemode "755"
+                    :sources {:source [{:location "scripts/service/{{lower-name}}"
+                                        :destination "{{lower-name}}"}]}}]}
 
   :main {{name}}.setup)
