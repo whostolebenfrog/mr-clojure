@@ -31,7 +31,7 @@
 
   :plugins [[lein-ring "0.8.12"]
             [lein-environ "1.0.0"]
-            [lein-release "1.0.73"]]
+            [lein-release "1.0.5"]]
 
   :env {:environment-name "poke"
         :service-name "{{name}}"
@@ -46,7 +46,8 @@
         :production "false"
         :shutdown-timeout-millis "5000"}
 
-  :lein-release {:release-tasks [:clean :uberjar :pom :rpm]}
+  :lein-release {:deploy-via :shell
+                 :shell ["lein" "do" "clean," "uberjar," "pom," "rpm"]}
 
   :ring {:handler {{name}}.web/app
          :main {{name}}.setup
