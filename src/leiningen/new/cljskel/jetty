@@ -5,7 +5,7 @@
 # To use this script run it as root - it will switch to the specified user
 #
 # Here is a little (and extremely primitive) startup/shutdown script
-# for RedHat systems. It assumes that {{upper-name}} lives in /usr/local/{{lower-name}},
+# for RedHat based systems. It assumes that {{upper-name}} lives in /usr/local/{{lower-name}},
 # it's run by user '{{lower-name}}' and JDK binaries are in /usr/java/default/bin.
 # All this can be changed in the script itself.
 #
