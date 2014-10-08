@@ -29,18 +29,18 @@ done
 IFS="$(echo -e " ")"
 
 SERVICE_PORT=${SERVICE_PORT:-"8080"}
-HEALTHCHECK_PATH=${SERVICE_HEALTHCHECK_PATH:-"/healthcheck"}
-SERVICE_JETTY_START_TIMEOUT_SECONDS=${SERVICE_JETTY_START_TIMEOUT_SECONDS:-"60"}
-SERVICE_LOGGING_PATH=${SERVICE_LOGGING_PATH:-"/var/log/${APP_NAME}"}
-LOG_FILE=${SERVICE_LOGGING_PATH}/{{lower-name}}.out
-ERR_FILE=${SERVICE_LOGGING_PATH}/{{lower-name}}.err
+HEALTHCHECK_PATH=${HEALTHCHECK_PATH:-"/healthcheck"}
+START_TIMEOUT_SECONDS=${START_TIMEOUT_SECONDS:-"60"}
+LOGGING_PATH=${LOGGING_PATH:-"/var/log/${SERVICE_NAME}"}
+LOG_FILE=${LOGGING_PATH}/{{lower-name}}.out
+ERR_FILE=${LOGGING_PATH}/{{lower-name}}.err
 
 mkdir -p /var/encrypted/logs/${APP_NAME}
 
-nohup java $SERVICE_JVMARGS -Dservice.logging.path=${SERVICE_LOGGING_PATH} -jar $JAR_NAME > $LOG_FILE 2> $ERR_FILE < /dev/null &
+nohup java $SERVICE_JVMARGS -jar $JAR_NAME > $LOG_FILE 2> $ERR_FILE < /dev/null &
 
 statusUrl=http://localhost:$SERVICE_PORT$HEALTHCHECK_PATH
-waitTimeout=$SERVICE_JETTY_START_TIMEOUT_SECONDS
+waitTimeout=$START_TIMEOUT_SECONDS
 sleepCounter=0
 sleepIncrement=2
 
