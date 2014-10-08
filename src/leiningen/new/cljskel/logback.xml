@@ -10,11 +10,11 @@
 
   <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-      <level>${SERVICE_LOGGING_FILETHRESHOLD:-info}</level>
+      <level>${LOGGING_FILETHRESHOLD:-info}</level>
     </filter>
-    <file>${SERVICE_LOGGING_PATH:-/tmp}/{{name}}.log</file>
+    <file>${LOGGING_PATH:-/tmp}/{{name}}.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${SERVICE_LOGGING_PATH:-/tmp}/{{name}}.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <fileNamePattern>${LOGGING_PATH:-/tmp}/{{name}}.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
       <maxHistory>28</maxHistory>
     </rollingPolicy>
     <encoder>
@@ -24,7 +24,7 @@
 
   <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
     <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-      <level>${SERVICE_LOGGING_CONSOLETHRESHOLD:-info}</level>
+      <level>${LOGGING_CONSOLETHRESHOLD:-info}</level>
     </filter>
     <encoder>
       <pattern>%d [%thread] %-5level %X{log-id} %logger{36} - %msg%n%ex</pattern>
@@ -33,11 +33,11 @@
 
   <appender name="stash" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-      <level>${SERVICE_LOGGING_STASHTHRESHOLD:-warn}</level>
+      <level>${LOGGING_STASHTHRESHOLD:-warn}</level>
     </filter>
-    <file>${SERVICE_LOGGING_PATH:-/tmp}/{{name}}-stash.log</file>
+    <file>${LOGGING_PATH:-/tmp}/{{name}}-stash.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${SERVICE_LOGGING_PATH:-/tmp}/{{name}}-stash.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+      <fileNamePattern>${LOGGING_PATH:-/tmp}/{{name}}-stash.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <maxFileSize>50MB</maxFileSize>
       </timeBasedFileNamingAndTriggeringPolicy>
@@ -46,7 +46,7 @@
     <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
   </appender>
 
-  <root level="${SERVICE_LOGGING_LEVEL:-info}">
+  <root level="${LOGGING_LEVEL:-info}">
     <appender-ref ref="file" />
     <appender-ref ref="console" />
     <appender-ref ref="stash" />
