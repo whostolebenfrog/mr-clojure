@@ -38,13 +38,13 @@
         :service-port "8080"
         :service-url "http://localhost:%s"
         :restdriver-port "8081"
-        :environment-entertainment-graphite-host ""
-        :environment-entertainment-graphite-port "8080"
-        :service-graphite-post-interval "1"
-        :service-graphite-post-unit "MINUTES"
-        :service-graphite-enabled "DISABLED"
-        :service-production "false"
-        :service-jetty-gracefulshutdown-millis "5000"}
+        :graphite-host ""
+        :graphite-port "8080"
+        :graphite-post-interval "1"
+        :graphite-post-unit "MINUTES"
+        :graphite-enabled "DISABLED"
+        :production "false"
+        :shutdown-timeout-millis "5000"}
 
   :lein-release {:release-tasks [:clean :uberjar :pom :rpm]}
 
