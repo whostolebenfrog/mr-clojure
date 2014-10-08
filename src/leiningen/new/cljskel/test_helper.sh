@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# override properties like:
-# export environment_music_scrobbling1_baseurl="http://localhost:${RESTDRIVER_PORT:="8081"}"
 TIMEOUT=30
 
 wait_for_port () {
