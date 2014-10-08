@@ -27,7 +27,7 @@
 (defn start
   []
   (setup/configure-logging)
-  (setup/start-graphite-reporting {:graphite-prefix (str (env :environment-name) (env :service-name) (env :numel-id setup/hostname))})
+  (setup/start-graphite-reporting {:graphite-prefix (str (env :environment-name) (env :service-name) (env :box-id setup/hostname))})
   (reset! server (start-server)))
 
 (defn stop
