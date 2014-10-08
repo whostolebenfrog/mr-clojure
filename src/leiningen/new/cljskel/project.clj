@@ -38,7 +38,7 @@
         :service-port "8080"
         :service-url "http://localhost:%s"
         :restdriver-port "8081"
-        :environment-entertainment-graphite-host "graphite.brislabs.com"
+        :environment-entertainment-graphite-host ""
         :environment-entertainment-graphite-port "8080"
         :service-graphite-post-interval "1"
         :service-graphite-post-unit "MINUTES"
