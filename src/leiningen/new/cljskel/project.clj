@@ -59,7 +59,7 @@
 
   :rpm {:name "{{lower-name}}"
         :summary "RPM for {{upper-name}} service"
-        :copyright "Microsoft {{year}}"
+        :copyright "MixRadio {{year}}"
         :preinstall {:scriptFile "scripts/rpm/preinstall.sh"}
         :postinstall {:scriptFile "scripts/rpm/postinstall.sh"}
         :preremove {:scriptFile "scripts/rpm/preremove.sh"}
