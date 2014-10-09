@@ -35,6 +35,7 @@
     <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
       <level>${LOGGING_STASHTHRESHOLD:-warn}</level>
     </filter>
+    <filter class="mixradio.metrics.GraphiteReporterFilter" />
     <file>${LOGGING_PATH:-/tmp}/${SERVICE_NAME}-stash.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${LOGGING_PATH:-/tmp}/${SERVICE_NAME}-stash.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>

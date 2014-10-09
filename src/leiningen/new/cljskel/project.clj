@@ -7,6 +7,7 @@
                  [clj-time "0.8.0"]
                  [compojure "1.2.0"]
                  [environ "1.0.0"]
+                 [mixradio/graphite-filter "1.0.0"]
                  [mixradio/instrumented-ring-jetty-adapter "1.0.0"]
                  [mixradio/radix "1.0.3"]
                  [net.logstash.logback/logstash-logback-encoder "3.2"]
