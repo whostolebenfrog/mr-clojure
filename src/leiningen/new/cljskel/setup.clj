@@ -1,9 +1,10 @@
 (ns {{name}}.setup
-  (:require [{{name}}.web :as web]
-            [environ.core :refer [env]]
-            [mixradio.instrumented-jetty :refer [run-jetty]]
-            [radix.setup :as setup])
-  (:gen-class))
+    (:require [{{name}}.web :as web]
+              [clojure.string :as str]
+              [environ.core :refer [env]]
+              [mixradio.instrumented-jetty :refer [run-jetty]]
+              [radix.setup :as setup])
+    (:gen-class))
 
 (defonce server
   (atom nil))
@@ -27,7 +28,7 @@
 (defn start
   []
   (setup/configure-logging)
-  (setup/start-graphite-reporting {:graphite-prefix (str (env :environment-name) (env :service-name) (env :box-id setup/hostname))})
+  (setup/start-graphite-reporting {:graphite-prefix (str/join "." [(env :environment-name) (env :service-name) (env :box-id setup/hostname)])})
   (reset! server (start-server)))
 
 (defn stop
