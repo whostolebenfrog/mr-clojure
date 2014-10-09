@@ -11,9 +11,8 @@
 (defn configure-server
   [server]
   (doto server
-    (.setSendServerVersion false)
     (.setStopAtShutdown true)
-    (.setGracefulShutdown setup/shutdown-timeout)))
+    (.setStopTimeout setup/shutdown-timeout)))
 
 (defn start-server
   []
@@ -22,7 +21,8 @@
                         :join? false
                         :stacktraces? (not setup/production?)
                         :auto-reload? (not setup/production?)
-                        :configurator configure-server}))
+                        :configurator configure-server
+                        :send-server-version false}))
 
 (defn start
   []
