@@ -47,11 +47,12 @@
         :production false
         :requestlog-enabled false
         :requestlog-retainhours 24
+        :restdriver-port 8081
         :service-name "{{name}}"
         :service-port 8080
         :service-url "http://localhost:%s"
         :shutdown-timeout-millis 5000
-        :restdriver-port 8081
+        :start-timeout-seconds 120
         :threads 254}
 
   :lein-release {:deploy-via :shell
