@@ -90,15 +90,24 @@ Each of these can be run in isolation using:
 
 `./all` to run all the tests
 
-## Components
+## Libraries
 
-::TODO - see blog for more info::
+These are some of the libraries that we use:
+
+* [cheshire](https://github.com/dakrone/cheshire) - excellent and fast JSON parsing and generation
+* [clj-http](https://github.com/dakrone/clj-http) - a nice interface for making http calls
+* [clj-time](https://github.com/clj-time/clj-time) - date and time library with a great interface
+* [clojure](http://clojure.org) - 1.6
+* [compojure](https://github.com/weavejester/compojure) - the basis of our web service, used to define resources and middleware
+* [environ](https://github.com/weavejester/environ) - reads environment variables and allows development values to be defined in the project.clj
+* [jetty](http://www.eclipse.org/jetty/) - a lightweight JVM web server that we embed with our services
+* [midje](https://github.com/marick/Midje) - testing and mocking
+* [rest-driver](https://github.com/whostolebenfrog/rest-cljer) - http level dependency mocking
 
 ## Deployment
 
-::TODO - rpm::
+`lein release` will update the version number, uberjar and then create an RPM of the service. This RPM can be installed on any compatible server (e.g. Redhat, CentOs, Amazon Linux). You will, however need to ensure that the environment variables defined in the project.clj are available for the RPM to run.
 
 ## License
 
 Copyright © 2014 MixRadio
-
