@@ -1,12 +1,12 @@
-(ns leiningen.new.cljskel
+(ns leiningen.new.mr-clojure
   (:use [leiningen.new.templates :only [renderer name-to-path ->files year]]))
 
-(def render (renderer "cljskel"))
+(def render (renderer "mr-clojure"))
 
 (defn cap [s]
   (str (.toUpperCase (subs s 0 1)) (subs s 1)))
 
-(defn cljskel
+(defn mr-clojure
   "Skeleton Clojure project"
   [name]
   (let [data {:name name
