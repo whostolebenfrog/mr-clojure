@@ -39,6 +39,7 @@
         :graphite-host ""
         :graphite-port 2003
         :graphite-post-interval-seconds 60
+        :logging-consolethreshold "info"
         :logging-filethreshold "info"
         :logging-level "info"
         :logging-path "/tmp"
