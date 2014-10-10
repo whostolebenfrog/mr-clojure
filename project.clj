@@ -1,4 +1,4 @@
-(defproject cljskel/lein-template "0.1.0"
-  :description "Skeleton project, a template that can be used to create a new Clojure web app implementing /ping and /healthcheck"
-  :url "http://wikis.in.nokia.com/Clojure/ClojureSkeleton"
+(defproject mr-clojure/lein-template "1.0.0"
+  :description "MixRadio clojure skeleton template for Leiningen. Generates a Clojure HTTP REST service in the style of MixRadio"
+  :url "http://github.com/mixradio/mr-clojure"
   :eval-in-leiningen true)
