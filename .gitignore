@@ -12,3 +12,4 @@ dc-sdk.log
 .project
 .lein-env
 pom.xml
+pom.xml.asc
