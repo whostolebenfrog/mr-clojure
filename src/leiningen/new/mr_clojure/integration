@@ -7,5 +7,5 @@ if [ "$1" != "wait" ]
 then
     run_test "{{name}}.integration" $TIMEOUT
 else
-    lein ring server-headless
+    lein run
 fi

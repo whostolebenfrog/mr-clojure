@@ -10,6 +10,7 @@
              [ignore-trailing-slash :refer [wrap-ignore-trailing-slash]]
              [setup :as setup]]
             [ring.middleware
+             [reload :refer [wrap-reload]]
              [format-params :refer [wrap-json-kw-params]]
              [format-response :refer [wrap-json-response]]
              [params :refer [wrap-params]]]))
@@ -39,6 +40,7 @@
 
 (def app
   (-> routes
+      (wrap-reload)
       (instrument)
       (wrap-error-handling)
       (wrap-ignore-trailing-slash)
