@@ -8,9 +8,9 @@
             [radix
              [error :refer [wrap-error-handling error-response]]
              [ignore-trailing-slash :refer [wrap-ignore-trailing-slash]]
-             [setup :as setup]]
+             [setup :as setup]
+             [reload :refer [wrap-reload]]]
             [ring.middleware
-             [reload :refer [wrap-reload]]
              [format-params :refer [wrap-json-kw-params]]
              [format-response :refer [wrap-json-response]]
              [params :refer [wrap-params]]]))
