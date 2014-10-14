@@ -8,7 +8,7 @@
                  [compojure "1.2.0"]
                  [environ "1.0.0"]
                  [mixradio/graphite-filter "1.0.0"]
-                 [mixradio/instrumented-ring-jetty-adapter "1.0.2"]
+                 [mixradio/instrumented-ring-jetty-adapter "1.0.4"]
                  [mixradio/radix "1.0.5"]
                  [net.logstash.logback/logstash-logback-encoder "3.2"]
                  [org.clojure/clojure "1.6.0"]
