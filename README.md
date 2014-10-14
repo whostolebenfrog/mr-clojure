@@ -90,6 +90,37 @@ Each of these can be run in isolation using:
 
 `./all` to run all the tests
 
+## Enabling SSL
+
+It's also possible to create a service that accepts SSL connections. There are a few steps that need
+to be taken to do this and you'll need to have knowledge of how SSL works and how to set it up. The
+example here uses the jetty test keystore and credentials, so don't use these in a production system!
+
+1. Copy the jetty test keystore (from the root of this project) to a location on your machine, 
+   for example to the root of the service you are creating.
+
+2. Add the following entries to the properties defined when calling run-jetty in the start-server
+   function in the setup.clj file of your new service:
+
+      `:ssl-port 8443
+      :keystore "path-to-keystore-file"
+      :key-password "OBF:1vny1zlo1x8e1vnw1vn61x8g1zlu1vn4"
+      :key-mgr-password "OBF:1u2u1wml1z7s1z7a1wnl1u2g"
+      :truststore "path-to-keystore-file"
+      :trust-password "OBF:1vny1zlo1x8e1vnw1vn61x8g1zlu1vn4"`
+
+   If you place the keystore file in the root of the service, you can just set path-of-keystore-file
+   to be the value `keystore`. If it's in another location, specify the full path to the file.
+
+3. Run `acceptance wait` and you'll see logging that shows both an HTTP and an HTTPS ServerConnector
+   being created.
+
+4. `curl http://localhost:8080/healthcheck` and you'll see a response over a non-SSL connection.
+
+5. `curl -v --insecure https://localhost:8443/healthcheck` and you'll see a response over a SSL
+   connection.  `--insecure` means don't worry about the test certificate being invalid and `-v` 
+   means that you'll see the various details of SSL protocol negotiation.
+
 ## Libraries
 
 These are some of the libraries that we use:
