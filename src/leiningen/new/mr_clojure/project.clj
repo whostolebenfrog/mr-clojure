@@ -19,7 +19,7 @@
                log4j
                org.clojure/clojure]
 
-  :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.36"
+  :profiles {:dev {:dependencies [[com.github.rest-driver/rest-client-driver "1.1.41"
                                    :exclusions [org.slf4j/slf4j-nop
                                                 javax.servlet/servlet-api
                                                 org.eclipse.jetty.orbit/javax.servlet]]
