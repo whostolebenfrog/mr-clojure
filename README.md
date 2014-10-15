@@ -4,7 +4,7 @@ MixRadio's clojure skeleton project.
 
 This generates the base REST service project that we use at MixRadio. In contains various libraries that we find useful and can be considered a condensing of the various pieces of commonality between our many clojure web services. We use this every day at MixRadio to power our music backend.
 
-This project is the underlying Leiningen template, see ::TODO - add link to project:: for an example of the generated service.
+This project is the underlying Leiningen template, see [mr-clojure-exploded](http://github.com/mixradio/mr-clojure-exploded) for an example of the resulting service.
 
 ## Usage
 
