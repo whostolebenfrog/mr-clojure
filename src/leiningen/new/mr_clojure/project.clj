@@ -34,7 +34,8 @@
             [lein-release "1.0.5"]
             [lein-ring "0.8.12"]]
 
-  :env {:environment-name "poke"
+  :env {:auto-reload true
+        :environment-name "poke"
         :graphite-enabled false
         :graphite-host ""
         :graphite-port 2003
@@ -53,8 +54,7 @@
         :service-url "http://localhost:%s"
         :shutdown-timeout-millis 5000
         :start-timeout-seconds 120
-        :threads 254
-        :auto-reload true}
+        :threads 254}
 
   :lein-release {:deploy-via :shell
                  :shell ["lein" "do" "clean," "uberjar," "pom," "rpm"]}
