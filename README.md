@@ -38,7 +38,7 @@ Open `src/<your-project-name>/web.clj` and navigate to the route definitions at 
 
 Here's how it should look:
 
-{% highlight clojure %}
+```clj
 (defroutes routes
 
   (GET "/healthcheck"
@@ -51,16 +51,16 @@ Here's how it should look:
        [nickname] (greet nickname))
 
   (route/not-found (error-response "Resource not found" 404)))
-{% endhighlight %}
+```
 
 And now let's define our greet function:
 
-{% endhighlight %}
+```clj
 (defn greet
   "Says hello!"
   [nickname]
   {:status 200 :body (format "Hello %s!\n" nickname)})
-{% endhighlight %}
+```
 
 Save the file and give it a test:
 
