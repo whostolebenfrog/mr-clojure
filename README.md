@@ -20,7 +20,7 @@ You now have a web service with a couple of basic "I'm alive" resources and an e
 
 `./acceptance wait`
 
-This starts the service in acceptance test mode but rather than running the tests and reporting the result, it just starts the service and waits. This allows you to manually call it or to run tests against it from the repl.
+This starts the service in acceptance test mode, but rather than running the tests and reporting the result, it just starts the service and waits. This allows you to manually call it or to run tests against it from the repl.
 
 Let's call the healthcheck resource and see if we get a response:
 
@@ -76,7 +76,7 @@ Success!
 
 There are a few different types of test defined in our skeleton project: unit, acceptance and integration. These words mean different things to different people and our definition is no exception so I'll define it here.
 * Unit - This one is pretty well defined. However unlike a lot of people we often test our web layer heavily using unit like tests where we don't start the server. There are examples of this in `test/unit/web.clj`
-* Acceptance - Our definition here is probably one that suits our service oriented architecture. To us acceptance tests mean starting the service and poking it from another process but only in isolation. That it was use [rest driver](http://github.com/whostolebenfrog/rest-cljer) to mock out our calls to other web services. Some teams use this heavily where others lean more towards web unit test.
+* Acceptance - Our definition here is probably one that suits our service oriented architecture. To us acceptance tests mean starting the service and poking it from another process, but only in isolation. This is when we use [rest driver](http://github.com/whostolebenfrog/rest-cljer) to mock out our calls to other web services. Some teams use this heavily where others lean more towards web unit test.
 * Integration - Many people refer to this as an acceptance test. This is where the service is started and called with all its dependencies.
 
 Each of these can be run in isolation using:
