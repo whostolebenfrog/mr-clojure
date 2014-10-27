@@ -11,7 +11,7 @@
 
 (defn request
   "Creates a compojure request map and applies it to our routes.
-   Accepets method, resource and optionally an extended map"
+   Accepts method, resource and optionally an extended map"
   [method resource & [{:keys [params body content-type headers]
                        :or {params {}
                             headers {}}}]]
