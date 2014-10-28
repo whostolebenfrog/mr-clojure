@@ -1,4 +1,4 @@
-# mr-clojure
+# Mr-Clojure
 
 MixRadio's clojure skeleton project.
 
