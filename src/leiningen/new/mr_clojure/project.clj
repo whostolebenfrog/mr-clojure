@@ -34,27 +34,27 @@
             [lein-release "1.0.5"]
             [lein-ring "0.8.12"]]
 
-  :env {:auto-reload true
+  :env {:auto-reload "true"
         :environment-name "poke"
-        :graphite-enabled false
+        :graphite-enabled "false"
         :graphite-host ""
-        :graphite-port 2003
-        :graphite-post-interval-seconds 60
+        :graphite-port "2003"
+        :graphite-post-interval-seconds "60"
         :logging-consolethreshold "info"
         :logging-filethreshold "info"
         :logging-level "info"
         :logging-path "/tmp"
         :logging-stashthreshold "off"
-        :production false
-        :requestlog-enabled false
-        :requestlog-retainhours 24
-        :restdriver-port 8081
+        :production "false"
+        :requestlog-enabled "false"
+        :requestlog-retainhours "24"
+        :restdriver-port "8081"
         :service-name "{{name}}"
-        :service-port 8080
+        :service-port "8080"
         :service-url "http://localhost:%s"
-        :shutdown-timeout-millis 5000
-        :start-timeout-seconds 120
-        :threads 254}
+        :shutdown-timeout-millis "5000"
+        :start-timeout-seconds "120"
+        :threads "254"}
 
   :lein-release {:deploy-via :shell
                  :shell ["lein" "do" "clean," "uberjar," "pom," "rpm"]}
