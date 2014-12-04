@@ -111,4 +111,4 @@ These are some of the libraries that we use:
 
 Copyright © 2014 MixRadio
 
-[mr-clojure is released under the 3-clause license ("New BSD License" or "Modified BSD License")](https://github.com/mixradio/radix/blob/master/LICENSE)
+[mr-clojure is released under the 3-clause license ("New BSD License" or "Modified BSD License")](https://github.com/mixradio/mr-clojure/blob/master/LICENSE)
