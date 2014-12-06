@@ -64,7 +64,7 @@ And now let's define our greet function:
 
 Save the file and give it a test:
 
-`curl localhost:8080/hello?nickname=world`
+`curl "http://localhost:8080/hello?nickname=world"`
 
 Should give us the output:
 
