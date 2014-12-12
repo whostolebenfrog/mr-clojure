@@ -28,7 +28,7 @@ Let's call the healthcheck resource and see if we get a response:
 
 and we should see the result:
 
-`{"name":"i","version":"1.0.1-SNAPSHOT","success":true,"dependencies":[]}`
+`{"name":"i","version":"1.0.0-SNAPSHOT","success":true,"dependencies":[]}`
 
 ## Adding in a new resource
 
