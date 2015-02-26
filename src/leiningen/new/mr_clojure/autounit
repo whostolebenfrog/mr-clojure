@@ -1,0 +1,4 @@
+#!/bin/bash
+export FILTER=${1:-unit}
+
+lein midje :autotest {{name}}.unit :filter $FILTER

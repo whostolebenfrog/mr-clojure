@@ -81,7 +81,7 @@ There are a few different types of test defined in our skeleton project: unit, a
 
 Each of these can be run in isolation using:
 
-`lein midje :filter unit`
+`lein midje :filter unit` or `./autounit` to watch for changes and automatically run unit tests.
 
 `./acceptance` or `./acceptance wait` to only start the server and not run the tests
 
