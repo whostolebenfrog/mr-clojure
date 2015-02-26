@@ -89,6 +89,17 @@ Each of these can be run in isolation using:
 
 `./all` to run all the tests
 
+### Running a single test in isolation
+If you add metadata to a specific integration/acceptance test (or tests) and then tell midje to run
+just those tests with that metadata. For example, consider the following acceptance test:
+
+```clojure
+(fact "test something"
+    :only
+    (test-stuff))
+```
+you can now run that test in isolation with `./acceptance only`.
+
 ## Libraries
 
 These are some of the libraries that we use:
