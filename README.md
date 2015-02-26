@@ -81,13 +81,24 @@ There are a few different types of test defined in our skeleton project: unit, a
 
 Each of these can be run in isolation using:
 
-`lein midje :filter unit`
+`lein midje :filter unit` or `./autounit` to watch for changes and automatically run unit tests.
 
 `./acceptance` or `./acceptance wait` to only start the server and not run the tests
 
 `./integration` or `./integration wait` to only start the server and not run the tests
 
 `./all` to run all the tests
+
+### Running a single test in isolation
+If you add metadata to a specific integration/acceptance test (or tests) and then tell midje to run
+just those tests with that metadata. For example, consider the following acceptance test:
+
+```clojure
+(fact "test something"
+    :only
+    (test-stuff))
+```
+you can now run that test in isolation with `./acceptance only`.
 
 ## Libraries
 

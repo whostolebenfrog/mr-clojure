@@ -5,7 +5,8 @@ TIMEOUT=30
 
 if [ "$1" != "wait" ]
 then
-    run_test "{{name}}.acceptance" $TIMEOUT
+    export FILTER=${1:-acceptance}
+    run_test "{{name}}.acceptance" $TIMEOUT $FILTER
 else
     lein run
 fi
