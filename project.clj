@@ -1,4 +1,4 @@
-(defproject mr-clojure/lein-template "1.0.7"
+(defproject mr-clojure/lein-template "1.0.8-SNAPSHOT"
   :description "MixRadio clojure skeleton template for Leiningen. Generates a Clojure HTTP REST service in the style of MixRadio"
   :url "http://github.com/mixradio/mr-clojure"
   :eval-in-leiningen true
