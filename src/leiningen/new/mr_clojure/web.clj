@@ -12,7 +12,7 @@
              [reload :refer [wrap-reload]]]
             [ring.middleware
              [format-params :refer [wrap-json-kw-params]]
-             [format-response :refer [wrap-json-response]]
+             [json :refer [wrap-json-response]]
              [params :refer [wrap-params]]]))
 
 (def version
