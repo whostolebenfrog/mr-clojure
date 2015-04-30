@@ -13,6 +13,7 @@
                  [net.logstash.logback/logstash-logback-encoder "3.2"]
                  [org.clojure/clojure "1.6.0"]
                  [org.clojure/tools.logging "0.3.1"]
+                 [ring/ring-json "0.3.1"]
                  [ring-middleware-format "0.4.0"]]
 
   :exclusions [commons-logging
