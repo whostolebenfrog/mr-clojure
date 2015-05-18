@@ -6,6 +6,7 @@
                  [clj-http "0.7.9"]
                  [clj-time "0.8.0"]
                  [compojure "1.2.0"]
+                 [com.codahale.metrics/metrics-logback "3.0.2"]
                  [environ "1.0.0"]
                  [mixradio/graphite-filter "1.0.0"]
                  [mixradio/instrumented-ring-jetty-adapter "1.0.4"]
