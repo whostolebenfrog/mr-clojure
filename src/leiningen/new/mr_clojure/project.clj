@@ -7,6 +7,7 @@
                  [clj-time "0.9.0"]
                  [compojure "1.3.4"]
                  [environ "1.0.0"]
+                 [io.dropwizard.metrics/metrics-logback "3.1.1"]
                  [mixradio/graphite-filter "1.0.0"]
                  [mixradio/instrumented-ring-jetty-adapter "1.0.5"]
                  [mixradio/radix "1.0.11"]
