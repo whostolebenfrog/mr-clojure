@@ -14,6 +14,12 @@ Generate a new project with:
 
 You now have a web service with a couple of basic "I'm alive" resources and an embedded Jetty server to run it.
 
+By supplying the `--reagent-webapp` optional argument the template configures the project for clojurescript development with [reagent](https://github.com/reagent-project/reagent) and [figwheel](https://github.com/bhauman/lein-figwheel):
+
+`lein new mr-clojure <your-project-name> -- --reagent-webapp`
+
+Typing `lein figwheel` inside the project directory will start the web server and give you a running clojurescript REPL.
+
 ### Testing your new service
 
 `cd` into your new project directory and run
