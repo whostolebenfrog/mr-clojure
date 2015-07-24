@@ -93,4 +93,7 @@
                     :sources {:source [{:location "scripts/service/{{lower-name}}"
                                         :destination "{{lower-name}}"}]}}]}
 
+
+  :aot [{{name}}.setup]
+
   :main {{name}}.setup)
