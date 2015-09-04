@@ -1,15 +1,20 @@
 (ns {{name}}.web
   (:require [compojure
-             [core :refer [defroutes context GET PUT POST DELETE]]
+             [core :refer [defroutes GET]]
              [route :as route]]
+            [environ.core :refer [env]]
             [metrics.ring
              [expose :refer [expose-metrics-as-json]]
              [instrument :refer [instrument]]]
+            {{#cljs-app?}}
+            [{{name}}.page-frame :refer [page-frame]]
+            [prone.middleware :refer [wrap-exceptions]]
+            {{/cljs-app?}}
             [radix
-             [error :refer [wrap-error-handling error-response]]
+             [error :refer [error-response wrap-error-handling]]
              [ignore-trailing-slash :refer [wrap-ignore-trailing-slash]]
-             [setup :as setup]
-             [reload :refer [wrap-reload]]]
+             [reload :refer [wrap-reload]]
+             [setup :as setup]]
             [ring.middleware
              [format-params :refer [wrap-json-kw-params]]
              [json :refer [wrap-json-response]]
@@ -17,6 +22,11 @@
 
 (def version
   (setup/version "{{name}}"))
+
+{{#cljs-app?}}
+(def dev-mode?
+  (boolean (env :dev-mode false)))
+{{/cljs-app?}}
 
 (defn healthcheck
   []
@@ -36,10 +46,20 @@
   (GET "/ping"
        [] "pong")
 
+  {{#cljs-app?}}
+  (GET "/"
+       [] (page-frame dev-mode?))
+
+  (route/resources "/")
+  {{/cljs-app?}}
+  
   (route/not-found (error-response "Resource not found" 404)))
 
 (def app
   (-> routes
+      {{#cljs-app?}}
+      (cond-> dev-mode? wrap-exceptions)
+      {{/cljs-app?}}
       (wrap-reload)
       (instrument)
       (wrap-error-handling)

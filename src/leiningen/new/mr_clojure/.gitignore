@@ -1,3 +1,9 @@
+.DS_Store
+{{#cljs-app?}}
+/resources/public/js
+figwheel_server.log
+*.min.css
+{{/cljs-app?}}
 *.swp
 target/*
 lib*
