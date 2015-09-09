@@ -126,6 +126,6 @@ These are some of the libraries that we use:
 
 ## License
 
-Copyright © 2014 MixRadio
+Copyright © 2015 MixRadio
 
 [mr-clojure is released under the 3-clause license ("New BSD License" or "Modified BSD License")](https://github.com/mixradio/mr-clojure/blob/master/LICENSE)
