@@ -2,7 +2,7 @@
     (:require [{{name}}.web :as web]
               [clojure.string :as str]
               [environ.core :refer [env]]
-              [metrics.core :refer [default-registry]]
+              [metrics.core :refer [default-registry remove-all-metrics]]
               [mixradio.instrumented-jetty :refer [run-jetty]]
               [radix.setup :as setup])
     (:import [ch.qos.logback.classic Logger]
@@ -50,12 +50,17 @@
 
 (defn stop
   []
+  (remove-all-metrics)
   (when-let [s @server]
     (.stop s)
-    (reset! server nil))
+    (reset! server nil)))
+
+(defn kill-service
+  []
+  (stop)
   (shutdown-agents))
 
 (defn -main
   [& args]
-  (.addShutdownHook (Runtime/getRuntime) (Thread. stop))
+  (.addShutdownHook (Runtime/getRuntime) (Thread. kill-service))
   (start))
