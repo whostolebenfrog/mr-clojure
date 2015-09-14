@@ -10,7 +10,7 @@
                  [com.codahale.metrics/metrics-logback "3.0.2"]
                  [mixradio/graphite-filter "1.0.0"]
                  [mixradio/instrumented-ring-jetty-adapter "1.0.4" :exclusions [metrics-clojure]]
-                 [mixradio/radix "1.0.12"]
+                 [mixradio/radix "1.0.13"]
                  [net.logstash.logback/logstash-logback-encoder "4.3"]
                  [org.clojure/clojure "1.7.0"]
                  [org.clojure/tools.logging "0.3.1"]
