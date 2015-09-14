@@ -2,7 +2,7 @@
     (:require [{{name}}.web :as web]
               [clojure.string :as str]
               [environ.core :refer [env]]
-              [metrics.core :refer [default-registry remove-all-metrics]]
+              [metrics.core :refer [default-registry]]
               [mixradio.instrumented-jetty :refer [run-jetty]]
               [radix.setup :as setup])
     (:import [ch.qos.logback.classic Logger]
@@ -40,6 +40,11 @@
     (.addFilter appender (GraphiteReporterFilter.))
     (.start appender)
     (.addAppender root appender)))
+
+(defn remove-all-metrics
+  []
+  (doseq [metric (.getNames default-registry)]
+    (.remove default-registry metric)))
 
 (defn start
   []
